@@ -15,6 +15,7 @@ export const signUpThunk = createAsyncThunk(
   'user/signUp',
   async (user: ISignUp) => {
     try {
+      console.log(user);
       return {
         id: 1,
         avatar: null,
@@ -31,6 +32,7 @@ export const loginInThunk = createAsyncThunk(
   'user/signIn',
   async (user: ILoginIn) => {
     try {
+      console.log(user);
       return {
         id: 1,
         avatar: null,
@@ -38,7 +40,7 @@ export const loginInThunk = createAsyncThunk(
         email: 'string',
       };
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   },
 );

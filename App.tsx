@@ -1,25 +1,23 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-import { LoginIn } from './src/screens/LoginIn/LoginIn';
-import { SignUp } from './src/screens/SignUp/SignUp';
-
-const Stack = createNativeStackNavigator();
-
-function RootStack() {
-  return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginIn} />
-      <Stack.Screen name="Sign" component={SignUp} />
-    </Stack.Navigator>
-  );
-}
+import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import BootSplash from 'react-native-bootsplash';
+import { BooksNavigator } from 'src/navigation/BooksNavigator';
+import { AuthNavigator } from 'src/navigation/AuthNavigator';
 
 function App(): React.JSX.Element {
+  useEffect(() => {
+    const init = async () => {};
+
+    init().finally(async () => {
+      await BootSplash.hide({fade: true});
+      console.log('BootSplash has been hidden successfully');
+    });
+  });
+
   return (
-  <NavigationContainer>
-    <RootStack />
-  </NavigationContainer>
+    <NavigationContainer>
+      {true ? <BooksNavigator /> : <AuthNavigator />}
+    </NavigationContainer>
   );
 }
 

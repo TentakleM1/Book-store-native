@@ -5,4 +5,5 @@ export default {
   mail: require('./mail.png'),
   profile: require('./profile.png'),
   search: require('./search.png'),
+  women: require('./women.png'),
 };
