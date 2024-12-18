@@ -1,5 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {loginInThunk, signUpThunk} from './userThunk';
+import {
+  getUserThunk,
+  loginInThunk,
+  signUpThunk,
+  uploadAvatarThunk,
+  updatePasswordThunk,
+  updateProfileThunk,
+} from './userThunk';
 
 interface ITokens {
   token: string;
@@ -42,7 +49,28 @@ export const userSlice = createSlice({
         (state, action: PayloadAction<IUser>) => {
           state.user = action.payload;
         },
-      );
+      )
+      .addCase(
+        getUserThunk.fulfilled,
+        (state, action: PayloadAction<IUser>) => {
+          state.user = action.payload;
+        },
+      )
+      .addCase(
+        updateProfileThunk.fulfilled,
+        (state, action: PayloadAction<IUser>) => {
+          state.user = action.payload;
+        },
+      )
+      .addCase(
+        uploadAvatarThunk.fulfilled,
+        (state, action: PayloadAction<IUser>) => {
+          state.user = action.payload;
+        },
+      )
+      .addCase(updatePasswordThunk.fulfilled, () => {
+        console.log('good');
+      });
   },
 });
 

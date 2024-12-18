@@ -24,12 +24,12 @@ export const CustomButton: React.FC<ICustomButtonProps> = props => {
     props.onPress && props.onPress(e);
 
     opacity.value = withSequence(
-      withTiming(0.3, { duration: 200 }),
-      withTiming(1, { duration: 200 })
+      withTiming(0.3, {duration: 200}),
+      withTiming(1, {duration: 200}),
     );
     scale.value = withSequence(
-      withTiming(1.2, { duration: 300 }),
-      withTiming(1, { duration: 300 })
+      withTiming(1.2, {duration: 300}),
+      withTiming(1, {duration: 300}),
     );
   };
 
@@ -40,7 +40,7 @@ export const CustomButton: React.FC<ICustomButtonProps> = props => {
 
   return (
     <Animated.View style={[styles.button, animatedButton]}>
-      <Pressable {...{...props, onPress: handlePress}}>
+      <Pressable {...props} onPress={handlePress}>
         <Text style={styles.buttonText}>{props.title}</Text>
       </Pressable>
     </Animated.View>

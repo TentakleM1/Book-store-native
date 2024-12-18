@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -11,17 +11,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    rowGap: 20,
+    rowGap: 10,
+  },
+
+  form: {
+    alignItems: 'center',
+    rowGap: 10,
   },
 
   baseText: {
     color: 'black',
     fontWeight: '800',
     fontSize: 28,
-  },
-
-  container__form: {
-    backgroundColor: 'red',
   },
 
   logo: {

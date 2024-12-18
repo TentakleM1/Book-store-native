@@ -1,19 +1,37 @@
 import React from 'react';
-import { Image, SafeAreaView, Text, View} from 'react-native';
+import {Image, SafeAreaView, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Input} from 'src/components/Input/Input';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import images from 'src/assets/imgs/images';
 import styles from './LoginIn.styles';
+import {loginInSchema} from 'src/utils/validation/authSchema';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {Controller, useForm} from 'react-hook-form';
+import {Input} from 'src/components/Input/Input';
+import {Lable} from 'src/components/Lable/Lable';
+import {ILogin} from 'src/types/types';
+import {loginInThunk} from 'src/store/userSlice/userThunk';
+import {useAppDispatch} from 'src/store/store';
 
 export const LoginInScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    resolver: yupResolver(loginInSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
-  const handleLogin = () => {
-    navigation.push('Books');
+  const loginIn = async (data: ILogin) => {
+    await dispatch(loginInThunk(data));
   };
-
   const handleChangeScreen = () => {
     navigation.push('Sign');
   };
@@ -23,17 +41,45 @@ export const LoginInScreen: React.FC = () => {
       <View style={styles.container}>
         <Image source={images.logo} style={styles.logo} />
         <Text style={styles.baseText}>Login In</Text>
-        <Input
-          img={images.mail}
-          placeholder={'Email'}
-          secureTextEntry={false}
-        />
-        <Input
-          img={images.hide}
-          placeholder={'Password'}
-          secureTextEntry={true}
-        />
-        <CustomButton title={'Log In'} onPress={handleLogin} />
+        <View>
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <Input
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+                img={images.mail}
+                placeholder="Email"
+              />
+            )}
+            name={'email'}
+          />
+          <Lable title="Email" errors={errors.email?.message} />
+        </View>
+        <View>
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <Input
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+                img={images.hide}
+                placeholder="Password"
+              />
+            )}
+            name={'password'}
+          />
+          <Lable title="Password" errors={errors.password?.message} />
+        </View>
+        <CustomButton title={'Login in'} onPress={handleSubmit(loginIn)} />
         <CustomButton title={'Sign up'} onPress={handleChangeScreen} />
       </View>
     </SafeAreaView>

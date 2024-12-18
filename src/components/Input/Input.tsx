@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, TextInput, TextInputProps, View} from 'react-native';
 import styles from './Input.styles';
 
-interface IInputProps extends TextInputProps {
+export interface IInputProps extends TextInputProps {
   img: number;
 }
 

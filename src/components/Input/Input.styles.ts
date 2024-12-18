@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   input__container: {
-    width: 300,
-    backgroundColor:'rgb(229, 231, 228)',
+    width: '100%',
+    backgroundColor:'#F0F4EF',
     borderRadius: 16,
     padding: 5,
     flexDirection: 'row',
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     columnGap: 10,
   },
   input: {
-    width: 240,
+    width: '80%',
     color: 'black',
     fontSize: 21,
     fontWeight: '600',

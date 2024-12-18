@@ -1,27 +1,14 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-
-export interface ILoginIn {
-  email: string;
-  password: string;
-}
-
-export interface ISignUp {
-  email: string;
-  password: string;
-  passwordReplay?: string;
-}
+import { IUpdatePassword, IUpdateProfile } from 'src/screens/ProfileScreen/types';
+import {AuthService} from 'src/service/AuthService/AuthService';
+import {UserService} from 'src/service/UserService/UserService';
+import {ILogin, ISignUp} from 'src/types/types';
 
 export const signUpThunk = createAsyncThunk(
   'user/signUp',
   async (user: ISignUp) => {
     try {
-      console.log(user);
-      return {
-        id: 1,
-        avatar: null,
-        fullName: 'string',
-        email: 'string',
-      };
+      return await AuthService.signUp(user);
     } catch (error) {
       console.log(error);
     }
@@ -29,16 +16,51 @@ export const signUpThunk = createAsyncThunk(
 );
 
 export const loginInThunk = createAsyncThunk(
-  'user/signIn',
-  async (user: ILoginIn) => {
+  'user/loginIn',
+  async (user: ILogin) => {
     try {
-      console.log(user);
-      return {
-        id: 1,
-        avatar: null,
-        fullName: 'string',
-        email: 'string',
-      };
+      return await AuthService.loginIn(user);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
+export const getUserThunk = createAsyncThunk('user/getUser', async () => {
+  try {
+    return await UserService.getUser();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const updateProfileThunk = createAsyncThunk(
+  'user/updateProfile',
+  async (user: IUpdateProfile) => {
+    try {
+      return await UserService.updateProfile(user);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
+export const uploadAvatarThunk = createAsyncThunk(
+  'user/updateAvatar',
+  async (formData: FormData) => {
+    try {
+      return await UserService.uploadAvatar(formData);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
+export const updatePasswordThunk = createAsyncThunk(
+  'user/updatePassword',
+  async (password: IUpdatePassword) => {
+    try {
+      await UserService.updatePassword(password);
     } catch (error) {
       console.log(error);
     }

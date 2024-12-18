@@ -5,7 +5,7 @@ import {
   useStore as useStoreBase,
 } from 'react-redux';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import userReducer from 'store/userSlise/userSlise';
+import userReducer from './userSlice/userSlice';
 
 const reducer = combineReducers({
   user: userReducer,

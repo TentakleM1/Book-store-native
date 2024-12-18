@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
     rowGap: 20,
   },
 
+  form: {
+    alignItems: 'center',
+    rowGap: 10,
+  },
+
   baseText: {
     color: 'black',
     fontWeight: '800',
