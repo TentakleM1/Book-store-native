@@ -73,9 +73,10 @@ export const updatePasswordApi = async (passwords: IUpdatePassword) => {
   return res.data;
 };
 
-export const uploadAvatarApi = async (base64: string) => {
+export const uploadAvatarApi = async (base64Data: string) => {
   const res = await axiosDefault.post('/files', {
-    avatar: base64,
+    base64Data: base64Data,
+    fileType: 'avatar',
   });
-  return res.data;
+  return res.data.data;
 };

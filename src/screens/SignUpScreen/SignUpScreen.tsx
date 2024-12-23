@@ -13,6 +13,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {ISignUp} from 'src/types/types';
 import {useAppDispatch} from 'src/store/store';
 import {signUpThunk} from 'src/store/userSlice/userThunk';
+import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
 
 export const SignUpScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -69,11 +70,10 @@ export const SignUpScreen: React.FC = () => {
               required: true,
             }}
             render={({field: {onChange, onBlur, value}}) => (
-              <Input
+              <PasswordInput
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={images.hide}
                 placeholder="Password"
               />
             )}
@@ -103,8 +103,10 @@ export const SignUpScreen: React.FC = () => {
             errors={errors.passwordReplay?.message}
           />
         </View>
-        <CustomButton title={'Sign up'} onPress={handleSubmit(signUp)} />
-        <CustomButton title={'Login in'} onPress={handleChangeScreen} />
+        <View style={{width: 200, gap: 20}}>
+          <CustomButton title={'Sign up'} onPress={handleSubmit(signUp)} />
+          <CustomButton title={'Login in'} onPress={handleChangeScreen} />
+        </View>
       </View>
     </SafeAreaView>
   );

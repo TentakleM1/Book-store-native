@@ -5,7 +5,7 @@ import {TokenService} from '../TokenService/TokenService';
 export class AuthService {
   static async loginIn(user: ILogin) {
     const data = await authorization(user);
-    await TokenService.setTokens(data.access_token, data.refresh_token);
+    TokenService.setTokens(data.access_token, data.refresh_token);
     return data.user;
   }
 
@@ -16,5 +16,7 @@ export class AuthService {
     return data.payload.user;
   }
 
-  static logout() {}
+  static logout() {
+    TokenService.clearTokens();
+  }
 }

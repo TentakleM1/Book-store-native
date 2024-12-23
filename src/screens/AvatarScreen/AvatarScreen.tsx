@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {SafeAreaView, View, Image} from 'react-native';
-// import {useAppDispatch} from 'src/store/store';
+import {useAppDispatch} from 'src/store/store';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import {
   Asset,
@@ -8,31 +8,19 @@ import {
   launchImageLibrary,
 } from 'react-native-image-picker';
 import {styles} from './Avatar.style';
-
-type CreateFormDataType = (photo: Asset | null) => FormData;
-
-const createFormData: CreateFormDataType = photo => {
-  const data = new FormData();
-  if (photo === null) {
-    return data;
-  }
-  data.append('photo', {
-    name: photo.fileName,
-    type: photo.type,
-    uri: photo.uri,
-  });
-
-  return data;
-};
+import {uploadAvatarThunk} from 'src/store/userSlice/userThunk';
+import {useNavigation} from '@react-navigation/native';
 
 export const AvatarScreen: React.FC = () => {
-  //   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [photo, setPhoto] = useState<Asset | null>(null);
+  const navigation = useNavigation();
 
   const chooiceAvatar = () => {
     launchImageLibrary(
       {
         mediaType: 'photo',
+        includeBase64: true,
       },
       response => {
         if (response.didCancel) {
@@ -50,6 +38,7 @@ export const AvatarScreen: React.FC = () => {
     launchCamera(
       {
         mediaType: 'photo',
+        includeBase64: true,
       },
       response => {
         if (response.didCancel) {
@@ -63,23 +52,30 @@ export const AvatarScreen: React.FC = () => {
     );
   };
 
-  const uploadAvatar = () => {
-    console.log(createFormData(photo));
+  const uploadAvatar = async () => {
+    if (!photo?.base64) {
+      return;
+    }
+    await dispatch(uploadAvatarThunk(photo.base64));
+    setPhoto(null);
+    navigation.goBack();
   };
 
   return (
-    <SafeAreaView style={styles.avatar}>
-      <View>
-        {photo !== null && (
-          <Image
-            source={{
-              uri: photo.uri,
-            }}
-            style={{width: 400, height: 400}}
-          />
-        )}
+    <SafeAreaView>
+      <View style={styles.avatar}>
         <View>
-          <CustomButton title="chooice avatar" onPress={chooiceAvatar} />
+          {photo !== null && (
+            <Image
+              source={{
+                uri: photo.uri,
+              }}
+              style={{width: 400, height: 400}}
+            />
+          )}
+        </View>
+        <View style={styles.buttonCantainer}>
+          <CustomButton title="chooice" onPress={chooiceAvatar} />
           <CustomButton title="camera" onPress={photoAvatar} />
           <CustomButton title="upload" onPress={uploadAvatar} />
         </View>

@@ -13,6 +13,7 @@ import {Lable} from 'src/components/Lable/Lable';
 import {ILogin} from 'src/types/types';
 import {loginInThunk} from 'src/store/userSlice/userThunk';
 import {useAppDispatch} from 'src/store/store';
+import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
 
 export const LoginInScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -67,11 +68,10 @@ export const LoginInScreen: React.FC = () => {
               required: true,
             }}
             render={({field: {onChange, onBlur, value}}) => (
-              <Input
+              <PasswordInput
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={images.hide}
                 placeholder="Password"
               />
             )}
@@ -79,8 +79,10 @@ export const LoginInScreen: React.FC = () => {
           />
           <Lable title="Password" errors={errors.password?.message} />
         </View>
-        <CustomButton title={'Login in'} onPress={handleSubmit(loginIn)} />
-        <CustomButton title={'Sign up'} onPress={handleChangeScreen} />
+        <View style={{width: 200, gap: 20,}}>
+          <CustomButton title={'Login in'} onPress={handleSubmit(loginIn)} />
+          <CustomButton title={'Sign up'} onPress={handleChangeScreen} />
+        </View>
       </View>
     </SafeAreaView>
   );

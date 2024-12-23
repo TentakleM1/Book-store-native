@@ -7,6 +7,7 @@ import {
   updatePasswordThunk,
   updateProfileThunk,
 } from './userThunk';
+import {AuthService} from 'src/service/AuthService/AuthService';
 
 interface ITokens {
   token: string;
@@ -22,6 +23,7 @@ export interface IUser {
 
 export interface IData {
   payload: {
+    books?: string;
     tokens?: ITokens;
     user?: IUser;
   };
@@ -38,7 +40,12 @@ const initialStateUser: IInitialStateUser = {
 export const userSlice = createSlice({
   name: 'user',
   initialState: initialStateUser,
-  reducers: {},
+  reducers: {
+    logout: state => {
+      AuthService.logout();
+      state.user = null;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(signUpThunk.fulfilled, (state, action: PayloadAction<IUser>) => {
@@ -64,8 +71,11 @@ export const userSlice = createSlice({
       )
       .addCase(
         uploadAvatarThunk.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          state.user = action.payload;
+        (state, action: PayloadAction<{filename: string}>) => {
+          if (state.user) {
+            console.log(action.payload);
+            state.user = {...state.user, avatar: action.payload.filename};
+          }
         },
       )
       .addCase(updatePasswordThunk.fulfilled, () => {
@@ -73,5 +83,6 @@ export const userSlice = createSlice({
       });
   },
 });
+export const {logout} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -4,5 +4,15 @@ export const styles = StyleSheet.create({
   avatar: {
     width: '100%',
     height: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+
+  buttonCantainer: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 20,
   },
 });

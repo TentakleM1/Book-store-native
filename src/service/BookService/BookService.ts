@@ -1,4 +1,4 @@
-import { getBookApi, getBooksApi } from "@/shared/api/bookApi/bookApi";
+import {getBookApi, getBooksApi} from 'src/api/bookApi/bookApi';
 
 export class BookService {
   static async getBook(id: number) {
@@ -7,7 +7,7 @@ export class BookService {
   }
 
   static async getBooks() {
-    const data = await getBooksApi();
-    return data.payload.books;
+    const payload = await getBooksApi();
+    return payload.data;
   }
 }

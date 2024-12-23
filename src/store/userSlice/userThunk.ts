@@ -46,10 +46,10 @@ export const updateProfileThunk = createAsyncThunk(
 );
 
 export const uploadAvatarThunk = createAsyncThunk(
-  'user/updateAvatar',
-  async (formData: FormData) => {
+  'user/uploadAvatar',
+  async (base64Data: string) => {
     try {
-      return await UserService.uploadAvatar(formData);
+      return await UserService.uploadAvatar(base64Data);
     } catch (error) {
       console.log(error);
     }

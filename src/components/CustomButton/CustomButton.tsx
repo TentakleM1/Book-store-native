@@ -4,6 +4,7 @@ import {
   PressableProps,
   Text,
   GestureResponderEvent,
+  Image,
 } from 'react-native';
 import styles from './CustomButton.styles';
 import Animated, {
@@ -13,8 +14,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-interface ICustomButtonProps extends PressableProps {
+export interface ICustomButtonProps extends PressableProps {
   title: string;
+  img?: number;
+  backgroundColor?: string;
 }
 
 export const CustomButton: React.FC<ICustomButtonProps> = props => {
@@ -22,15 +25,8 @@ export const CustomButton: React.FC<ICustomButtonProps> = props => {
   const scale = useSharedValue(1);
   const handlePress = (e: GestureResponderEvent) => {
     props.onPress && props.onPress(e);
-
-    opacity.value = withSequence(
-      withTiming(0.3, {duration: 200}),
-      withTiming(1, {duration: 200}),
-    );
-    scale.value = withSequence(
-      withTiming(1.2, {duration: 300}),
-      withTiming(1, {duration: 300}),
-    );
+    opacity.value = withSequence(withTiming(1, {duration: 200}));
+    scale.value = withSequence(withTiming(1, {duration: 300}));
   };
 
   const animatedButton = useAnimatedStyle(() => ({
@@ -39,9 +35,25 @@ export const CustomButton: React.FC<ICustomButtonProps> = props => {
   }));
 
   return (
-    <Animated.View style={[styles.button, animatedButton]}>
-      <Pressable {...props} onPress={handlePress}>
-        <Text style={styles.buttonText}>{props.title}</Text>
+    <Animated.View
+      style={[
+        styles.button,
+        props.img ? styles.buttonFulltRadius : styles.buttonDefaultRadius,
+        {backgroundColor: props.img ? props.backgroundColor : '#344966'},
+        animatedButton,
+      ]}>
+      <Pressable
+        {...props}
+        onPressIn={() => {
+          opacity.value = withSequence(withTiming(0.3, {duration: 200}));
+          scale.value = withSequence(withTiming(1.1, {duration: 300}));
+        }}
+        onPressOut={handlePress}>
+        {props.img ? (
+          <Image source={props.img} />
+        ) : (
+          <Text style={styles.buttonText}>{props.title}</Text>
+        )}
       </Pressable>
     </Animated.View>
   );

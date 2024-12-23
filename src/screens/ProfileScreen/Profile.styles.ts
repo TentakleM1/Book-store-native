@@ -8,9 +8,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  scroll: {
-  },
-
   avatar: {
     width: '100%',
     height: 350,
@@ -22,19 +19,24 @@ const styles = StyleSheet.create({
 
   avatarButton: {
     position: 'absolute',
-    right: 10,
-    bottom: 10,
+    right: 20,
+    bottom: 20,
   },
 
   information: {
     width: '100%',
     marginTop: 30,
     display: 'flex',
-    gap: 10,
+    gap: 15,
   },
 
-  text: {
-    color: '#0D1821',
+  titleChange: {
+    gap: 5,
+  },
+
+  textChange: {
+    color: '#8D9F4F',
+    textDecorationLine: 'underline',
     fontSize: 18,
     fontWeight: '700',
   },

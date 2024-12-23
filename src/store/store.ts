@@ -6,9 +6,13 @@ import {
 } from 'react-redux';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import userReducer from './userSlice/userSlice';
+import bookReducer from './bookSlice/bookSlice';
+import bookingReducer from './bookingSlice/bookingSlice';
 
 const reducer = combineReducers({
   user: userReducer,
+  book: bookReducer,
+  booking: bookingReducer,
 });
 
 export const store = configureStore({reducer});

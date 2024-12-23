@@ -1,9 +1,11 @@
 import {StyleSheet} from 'react-native';
+import { widthDimensions } from 'src/styles/global.style';
 
 export const styles = StyleSheet.create({
   banner: {
     height: 500,
-    width: 350,
+    width: widthDimensions,
+    position: 'relative',
     paddingTop: 20,
     display: 'flex',
     alignItems: 'center',
@@ -14,18 +16,13 @@ export const styles = StyleSheet.create({
 
   bannerTitle: {
     display: 'flex',
-    gap: 10,
+    gap: 30,
   },
 
-  textTitle: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: '700',
-  },
-
-  text: {
-    color: 'black',
-    fontSize: 14,
-    fontWeight: '500',
+  transparentImg: {
+    position: 'absolute',
+    right: 0,
+    top: 10,
+    opacity: 0.3,
   },
 });

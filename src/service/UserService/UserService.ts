@@ -5,7 +5,6 @@ import {
   updateProfileApi,
 } from 'src/api/userApi/userApi';
 import {IUpdatePassword, IUpdateProfile} from 'src/screens/ProfileScreen/types';
-import { convertToBase64Async } from 'src/utils/convertToBase64Async/convertToBase64Async';
 
 export class UserService {
   static async getUser() {
@@ -18,15 +17,8 @@ export class UserService {
     return data.user;
   }
 
-  static async uploadAvatar(formData: FormData) {
-    const file = formData.get('file');
-    if (typeof file === 'string' || !file) return;
-    const base64 = await convertToBase64Async(file);
-    if (typeof base64 !== 'string') {
-      throw new Error('coded not true');
-    }
-    const data = await uploadAvatarApi(base64.split(',')[1]);
-    return data.payload.user;
+  static async uploadAvatar(base64Data: string) {
+    return await uploadAvatarApi(base64Data);
   }
 
   static async updatePassword(passwords: IUpdatePassword) {
