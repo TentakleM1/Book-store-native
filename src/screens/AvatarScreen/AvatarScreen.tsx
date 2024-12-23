@@ -10,6 +10,8 @@ import {
 import {styles} from './Avatar.style';
 import {uploadAvatarThunk} from 'src/store/userSlice/userThunk';
 import {useNavigation} from '@react-navigation/native';
+import images from 'src/assets/imgs/images';
+import globalStyles from 'src/styles/global.style';
 
 export const AvatarScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -65,19 +67,27 @@ export const AvatarScreen: React.FC = () => {
     <SafeAreaView>
       <View style={styles.avatar}>
         <View>
-          {photo !== null && (
-            <Image
-              source={{
-                uri: photo.uri,
-              }}
-              style={{width: 400, height: 400}}
-            />
-          )}
+          <Image
+            source={
+              photo !== null
+                ? {
+                    uri: photo.uri,
+                  }
+                : images.defImg
+            }
+            style={{width: 400, height: 400, borderRadius: 20}}
+          />
         </View>
         <View style={styles.buttonCantainer}>
-          <CustomButton title="chooice" onPress={chooiceAvatar} />
-          <CustomButton title="camera" onPress={photoAvatar} />
-          <CustomButton title="upload" onPress={uploadAvatar} />
+          <View style={globalStyles.button}>
+            <CustomButton title="chooice" onPress={chooiceAvatar} />
+          </View>
+          <View style={globalStyles.button}>
+            <CustomButton title="camera" onPress={photoAvatar} />
+          </View>
+          <View style={globalStyles.button}>
+            <CustomButton title="upload" onPress={uploadAvatar} />
+          </View>
         </View>
       </View>
     </SafeAreaView>

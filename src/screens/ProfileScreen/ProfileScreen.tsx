@@ -89,12 +89,11 @@ export const ProfileScreen: React.FC = () => {
   };
 
   const updateAvatar = () => {
-    navigation.push('Avatar');
+    navigation.navigate('Avatar');
   };
 
   const logoutUser = () => {
     dispatch(logout());
-    navigation.push('Login');
   };
 
   return (
@@ -109,7 +108,7 @@ export const ProfileScreen: React.FC = () => {
             style={{width: '100%', height: '100%'}}
           />
           <View style={styles.avatarButton}>
-            <IconButton img={images.camera} onPress={updateAvatar} />
+            <IconButton img={images.camera} onPress={updateAvatar} background={'default'} />
           </View>
         </View>
         <View style={styles.information}>

@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import {Empty} from 'src/components/Empty/Empty';
 import globalStyles from 'src/styles/global.style';
 import {styles} from './Booking.styles';
-import {useAppSelector} from 'src/store/store';
+import {useAppDispatch, useAppSelector} from 'src/store/store';
 import {BookingBook} from './components/BookingBook/BookingBook';
+import {getCartThunk} from 'src/store/bookingSlice/bookingThunk';
 
 export const BookingScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
   const {id, total_price, cartItems} = useAppSelector(
     state => state.booking.booking,
   );
+  console.log(cartItems);
+  useEffect(() => {
+    if (id <= 0) {
+      dispatch(getCartThunk());
+    }
+  }, [dispatch, id, total_price, cartItems]);
   return (
     <SafeAreaView style={styles.booking}>
       <View style={styles.bookingContainer}>
@@ -27,7 +35,7 @@ export const BookingScreen: React.FC = () => {
             />
           }
         />
-        {cartItems.lenth > 0 && (
+        {cartItems.length > 0 && (
           <View style={styles.bookingTotalBuy}>
             <Text style={globalStyles.textBig}>
               Total: <Text style={globalStyles.textBigBold}>34.98</Text>

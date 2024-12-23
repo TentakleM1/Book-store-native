@@ -16,11 +16,15 @@ interface IBooking {
 }
 
 interface IInitialStateBooking {
-  booking: IBooking | null;
+  booking: IBooking;
 }
 
 const initialStateBooking: IInitialStateBooking = {
-  booking: null,
+  booking: {
+    id: 0,
+    total_price: 0,
+    cartItems: [],
+  },
 };
 
 export const bookingSlice = createSlice({
@@ -31,7 +35,10 @@ export const bookingSlice = createSlice({
     builder.addCase(
       getCartThunk.fulfilled,
       (state, action: PayloadAction<IBooking>) => {
-        state.booking = action.payload;
+        console.log(action.payload.cartItems);
+        state.booking.cartItems = action.payload.cartItems;
+        state.booking.id = action.payload.id;
+        state.booking.total_price = action.payload.total_price;
       },
     );
   },

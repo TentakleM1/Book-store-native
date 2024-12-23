@@ -33,6 +33,10 @@ const globalStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
   },
+
+  button: {
+    width: '100%',
+  },
 });
 
 export default globalStyles;

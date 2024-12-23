@@ -6,6 +6,6 @@ export const styles = StyleSheet.create({
   },
 
   like: {
-    opacity: 0.5,
+    opacity: 0.7,
   },
 });

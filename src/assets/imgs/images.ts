@@ -8,6 +8,7 @@ export default {
   homeTab: require('./home.png'),
   unionTab: require('./union.png'),
   cartTab: require('./cart.png'),
+  cartLightTab: require('./cartLightTab.png'),
   search: require('./search.png'),
   women: require('./women.png'),
   view: require('./view.png'),
@@ -16,4 +17,8 @@ export default {
   plus: require('./plus.png'),
   more: require('./more.png'),
   heart: require('./heart.png'),
+  defImg: require('./defImg.png'),
+  filter: require('./filter.png'),
+  star: require('./star.png'),
+  fullStar: require('./fullStar.png'),
 };

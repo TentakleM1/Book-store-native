@@ -33,17 +33,46 @@ export interface IBook {
 type BooksType = IBook[];
 
 interface IInitialStateBook {
+  book: IBook;
   books: BooksType;
 }
 
 const initialStateBook: IInitialStateBook = {
+  book: {
+    id: 0,
+    name: 'string',
+    img: 'string',
+    description: 'string',
+    isBestseller: false,
+    isNew: false,
+    dateOfIssue: 'string',
+    author: {
+      id: 0,
+      text: 'string',
+    },
+    bookGenres: [],
+    cover: {
+      id: 0,
+      paperback_price: 0,
+      paperback_amount: 0,
+      hardcover_price: 0,
+      hardcover_amount: 0,
+    },
+    comments: [],
+    rates: [],
+    totalRate: 1,
+  },
   books: [],
 };
 
 export const bookSlice = createSlice({
   name: 'book',
   initialState: initialStateBook,
-  reducers: {},
+  reducers: {
+    addBook: (state, action: PayloadAction<IBook>) => {
+      state.book = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(
       getBooksThunk.fulfilled,
@@ -53,5 +82,7 @@ export const bookSlice = createSlice({
     );
   },
 });
+
+export const {addBook} = bookSlice.actions;
 
 export default bookSlice.reducer;

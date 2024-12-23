@@ -25,4 +25,12 @@ export const styles = StyleSheet.create({
     top: 10,
     left: 10,
   },
+  infoButton: {
+    width: '60%',
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    display: 'flex',
+    rowGap: 5,
+  },
 });

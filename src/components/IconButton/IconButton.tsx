@@ -10,8 +10,7 @@ interface IIconButtonProps
 }
 
 export const IconButton: React.FC<IIconButtonProps> = props => {
-  const [isLike, setIsLike] = useState<boolean | undefined>(props.isLike);
-
+  const [isLike, setIsLike] = useState<boolean>(props.isLike ? props.isLike : false);
   const onPress = (e: GestureResponderEvent) => {
     if (props.isLike !== undefined) {
       setIsLike(!isLike);

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   },
 
   buttonCantainer: {
-    width: '100%',
+    width: 200,
     display: 'flex',
     alignItems: 'center',
     gap: 20,
