@@ -5,23 +5,18 @@ import globalStyles from 'src/styles/global.style';
 import {SERVER_URL} from 'src/config/api.config';
 import {CustomButton} from '../CustomButton/CustomButton';
 import {IconButton} from '../IconButton/IconButton';
-import {addBook, IBook} from 'src/store/bookSlice/bookSlice';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useAppDispatch} from 'src/store/store';
+import {IBook} from 'src/store/bookSlice/bookSlice';
 import images from 'src/assets/imgs/images';
 
-export const BookCart: React.FC<IBook> = props => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const dispatch = useAppDispatch();
-  const choiceBook = () => {
-    dispatch(addBook(props));
-    navigation.navigate('Book', {id: props.id});
-  };
+interface IBookCartProps extends IBook {
+  onPress: () => void;
+}
+
+export const BookCart: React.FC<IBookCartProps> = props => {
   return (
     <View style={styles.book}>
       <View style={styles.bookImg}>
-        <Pressable onPress={choiceBook}>
+        <Pressable onPress={props.onPress}>
           <Image
             source={{
               uri: `${SERVER_URL}/uploads/books/${props.img}`,

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IBook} from '../bookSlice/bookSlice';
-import {getCartThunk} from './bookingThunk';
+import {addBookInCartThunk, getCartThunk} from './bookingThunk';
 
 interface ICartItems {
   id: number;
@@ -32,15 +32,23 @@ export const bookingSlice = createSlice({
   initialState: initialStateBooking,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(
-      getCartThunk.fulfilled,
-      (state, action: PayloadAction<IBooking>) => {
-        console.log(action.payload.cartItems);
-        state.booking.cartItems = action.payload.cartItems;
-        state.booking.id = action.payload.id;
-        state.booking.total_price = action.payload.total_price;
-      },
-    );
+    builder
+      .addCase(
+        getCartThunk.fulfilled,
+        (state, action: PayloadAction<IBooking>) => {
+          state.booking.cartItems = action.payload.cartItems;
+          state.booking.id = action.payload.id;
+          state.booking.total_price = action.payload.total_price;
+        },
+      )
+      .addCase(
+        addBookInCartThunk.fulfilled,
+        (state, action: PayloadAction<IBooking>) => {
+          state.booking.cartItems = action.payload.cartItems;
+          state.booking.id = action.payload.id;
+          state.booking.total_price = action.payload.total_price;
+        },
+      );
   },
 });
 

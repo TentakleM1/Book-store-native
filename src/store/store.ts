@@ -8,11 +8,13 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import userReducer from './userSlice/userSlice';
 import bookReducer from './bookSlice/bookSlice';
 import bookingReducer from './bookingSlice/bookingSlice';
+import filterReducer from './filterSlice/filterSlice';
 
 const reducer = combineReducers({
   user: userReducer,
   book: bookReducer,
   booking: bookingReducer,
+  filter: filterReducer,
 });
 
 export const store = configureStore({reducer});

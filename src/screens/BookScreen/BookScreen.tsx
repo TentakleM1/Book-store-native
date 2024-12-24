@@ -4,7 +4,6 @@ import {Image, SafeAreaView, Text, View} from 'react-native';
 import globalStyles from 'src/styles/global.style';
 import {useAppSelector} from 'src/store/store';
 import {SERVER_URL} from 'src/config/api.config';
-import {RefreshLayout} from 'src/components/RefreshLayout/RefreshLayout';
 import {styles} from './Book.styles';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import images from 'src/assets/imgs/images';
@@ -26,7 +25,6 @@ export const BookScreen: React.FC<IBookScreenProps> = ({route}) => {
 
   return (
     <SafeAreaView style={styles.book}>
-      <RefreshLayout>
         <View style={styles.bookContainer}>
           <View style={styles.bookImg}>
             <Image
@@ -62,7 +60,6 @@ export const BookScreen: React.FC<IBookScreenProps> = ({route}) => {
             </View>
           </View>
         </View>
-      </RefreshLayout>
     </SafeAreaView>
   );
 };
