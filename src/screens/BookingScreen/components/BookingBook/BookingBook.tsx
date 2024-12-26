@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import images from 'src/assets/imgs/images';
-import globalStyles from 'src/styles/global.style';
+import globalStyles from 'src/styles/global.styles';
 import {styles} from './BookingBook.style';
 import {SERVER_URL} from 'src/config/api.config';
 import {IconButton} from 'src/components/IconButton/IconButton';
@@ -15,7 +15,7 @@ export const BookingBook: React.FC = () => {
             uri: `${SERVER_URL}/uploads/books/dorian.png`,
             method: 'GET',
           }}
-          style={{width: '100%', height: '100%'}}
+          style={globalStyles.displayFull}
         />
       </View>
       <View style={styles.bookContent}>

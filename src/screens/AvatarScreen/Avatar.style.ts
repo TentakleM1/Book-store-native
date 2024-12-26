@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { colors } from 'src/styles/colors.styles';
 
 export const styles = StyleSheet.create({
   avatar: {
@@ -6,7 +7,7 @@ export const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
 
   buttonCantainer: {

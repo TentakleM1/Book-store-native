@@ -1,13 +1,13 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {styles} from './Lable.style';
+import {styles} from './Label.style';
 
-interface ILableProps {
+type LablePropsType = {
   title: string;
   errors?: string;
-}
+};
 
-export const Lable: React.FC<ILableProps> = props =>
+export const Label: React.FC<LablePropsType> = props =>
   props.errors ? (
     <Text style={{...styles.lable, ...styles.errors}}>{props.errors}</Text>
   ) : (

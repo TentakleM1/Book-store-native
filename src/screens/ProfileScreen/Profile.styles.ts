@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
+import { colors } from 'src/styles/colors.styles';
 
 const styles = StyleSheet.create({
   profile: {
     height: '100%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     display: 'flex',
     alignItems: 'center',
   },
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: '100%',
     height: 350,
-    backgroundColor: '#F0F4EF',
+    backgroundColor: colors.light,
     borderRadius: 24,
     overflow: 'hidden',
     position: 'relative',
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
 
   textChange: {
-    color: '#8D9F4F',
+    color: colors.dark_green,
     textDecorationLine: 'underline',
     fontSize: 18,
     fontWeight: '700',

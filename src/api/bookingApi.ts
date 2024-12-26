@@ -1,4 +1,4 @@
-import {axiosDefault} from '../axiosDefault';
+import {axiosDefault} from './axiosDefault';
 
 export const getCartApi = async () => {
   const res = await axiosDefault.get('/user/cart');

@@ -1,18 +1,18 @@
 import {RouteProp} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {Image, SafeAreaView, Text, View} from 'react-native';
-import globalStyles from 'src/styles/global.style';
+import globalStyles from 'src/styles/global.styles';
 import {useAppSelector} from 'src/store/store';
 import {SERVER_URL} from 'src/config/api.config';
 import {styles} from './Book.styles';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import images from 'src/assets/imgs/images';
 
-interface IBookScreenProps {
+type BookScreenPropsType = {
   route?: RouteProp<{params: {id: string}}, 'params'>;
 }
 
-export const BookScreen: React.FC<IBookScreenProps> = ({route}) => {
+export const BookScreen: React.FC<BookScreenPropsType> = ({route}) => {
   const book = useAppSelector(state => state.book.book);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const BookScreen: React.FC<IBookScreenProps> = ({route}) => {
                 uri: `${SERVER_URL}/uploads/books/${book.img}`,
                 method: 'GET',
               }}
-              style={{width: '100%', height: '100%'}}
+              style={globalStyles.displayFull}
             />
           </View>
           <View>

@@ -20,9 +20,12 @@ export function RootNavigation() {
       await BootSplash.hide({fade: true});
     });
   });
-  return (
-    <NavigationContainer>
-      {user ? <BooksNavigator /> : <AuthNavigator />}
-    </NavigationContainer>
-  );
+
+  if (user !== null) {
+    return (
+      <NavigationContainer>
+        {user ? <BooksNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    );
+  }
 }

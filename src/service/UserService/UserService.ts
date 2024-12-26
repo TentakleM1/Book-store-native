@@ -3,7 +3,7 @@ import {
   uploadAvatarApi,
   updatePasswordApi,
   updateProfileApi,
-} from 'src/api/userApi/userApi';
+} from 'src/api/userApi';
 import {IUpdatePassword, IUpdateProfile} from 'src/screens/ProfileScreen/types';
 
 export class UserService {

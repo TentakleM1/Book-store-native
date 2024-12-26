@@ -1,4 +1,4 @@
-import {addBookInCartApi, getCartApi} from 'src/api/bookingApi/bookingApi';
+import {addBookInCartApi, getCartApi} from 'src/api/bookingApi';
 
 export class BookingService {
   static async getCart() {

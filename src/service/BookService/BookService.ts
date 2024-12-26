@@ -2,7 +2,7 @@ import {
   getBookApi,
   getBookFilterApi,
   getGenresApi,
-} from 'src/api/bookApi/bookApi';
+} from 'src/api/bookApi';
 import {IQueryData} from 'src/store/bookSlice/bookThunk';
 
 export class BookService {

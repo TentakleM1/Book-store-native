@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { heightDimensions, widthDimensions } from 'src/styles/global.style';
+import { heightDimensions, widthDimensions } from 'src/styles/global.styles';
 
 export const styles = StyleSheet.create({
   empty: {

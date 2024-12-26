@@ -1,4 +1,4 @@
-import {axiosDefault} from '../axiosDefault';
+import {axiosDefault} from './axiosDefault';
 
 export const getGenresApi = async () => {
   const res = await axiosDefault.get('/genres');

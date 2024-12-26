@@ -1,5 +1,5 @@
 import {IQueryData} from 'src/store/bookSlice/bookThunk';
-import {axiosDefault} from '../axiosDefault';
+import {axiosDefault} from './axiosDefault';
 
 export const getBookApi = async (id: number) => {
   const res = await axiosDefault.get(`/books/${id}`);
@@ -7,9 +7,8 @@ export const getBookApi = async (id: number) => {
 };
 
 export const getBookFilterApi = async (query: IQueryData) => {
-  console.log(query)
+  console.log('>>>>>>>>>>>>>>', query)
   const res = await axiosDefault.get('/books', {params: query});
-  console.log(res.data)
   return res.data;
 };
 

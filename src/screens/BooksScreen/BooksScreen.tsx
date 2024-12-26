@@ -9,18 +9,20 @@ import {
   View,
 } from 'react-native';
 import styles from './Books.style';
-import {Header} from 'src/components/Header/Header';
-import {Banner} from 'src/components/Banner/Banner';
-import {Catalog} from 'src/components/Catalog/Catalog';
+import {CatalogHeader} from 'src/screens/BooksScreen/components/CatalogHeader/CatalogHeader';
+import {CatalogBanner} from 'src/screens/BooksScreen/components/CatalogBanner/CatalogBanner';
+import {Catalog} from 'src/screens/BooksScreen/components/Catalog/Catalog';
 import {useAppDispatch, useAppSelector} from 'src/store/store';
 import {getBookFilterThunk, IQueryData} from 'src/store/bookSlice/bookThunk';
 import {useNavigation} from '@react-navigation/native';
 import {addBook, IBook} from 'src/store/bookSlice/bookSlice';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {usePagination} from 'src/hoc/usePagination/usePagination';
+import {usePaginationOrRefreshBooks} from './usePaginationOrRefreshBooks';
+import {getGenresThunk} from 'src/store/filterSlice/filterThunk';
 
 export const BooksScreen: React.FC = () => {
   const {books, meta} = useAppSelector(state => state.book);
+  const genres = useAppSelector(state => state.filter.filters);
   const [textSearch, setTextSearch] = useState<string>('');
   const [filter, setFilter] = useState<IQueryData>({
     page: meta.page,
@@ -28,13 +30,31 @@ export const BooksScreen: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const {loadingMore, refreshing, handleRefresh, loadMore} = usePagination({
+  const {loadingMore, refreshing, handleRefresh, loadMore} = usePaginationOrRefreshBooks({
     ...filter,
     ...meta,
   });
 
   useEffect(() => {
-    dispatch(getBookFilterThunk(filter));
+    if (genres === null) {
+      dispatch(getGenresThunk());
+    }
+    if (genres) {
+      const genresFilt =
+        genres &&
+        genres
+          .filter(genre => genre.isChecked)
+          .map(genre => genre.id)
+          .join();
+      if (genresFilt.length > 0) {
+        filter.genres = genresFilt;
+      }
+    }
+  }, [dispatch, filter, genres]);
+
+  useEffect(() => {
+      console.log('work')
+      dispatch(getBookFilterThunk(filter));
   }, [dispatch, filter]);
 
   const handleFilter = () => {
@@ -54,7 +74,7 @@ export const BooksScreen: React.FC = () => {
     e: NativeSyntheticEvent<TextInputKeyPressEventData>,
   ) => {
     console.log(e);
-    // setFilter({...filter, search: search});
+    setFilter({...filter, search: ''});
   };
 
   const renderFooter = () => {
@@ -70,12 +90,12 @@ export const BooksScreen: React.FC = () => {
         data={[books]}
         renderItem={({item}) => (
           <View style={styles.booksContainer}>
-            <Header
+            <CatalogHeader
               value={textSearch}
               onChangeText={handleSearch}
               onKeyPress={handleSearchPost}
             />
-            <Banner />
+            <CatalogBanner />
             <Catalog
               books={item}
               handleBook={handleBook}

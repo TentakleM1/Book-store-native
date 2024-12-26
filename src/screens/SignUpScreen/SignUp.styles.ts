@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
+import { colors } from 'src/styles/colors.styles';
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   container: {
     height: 300,
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
   },
 
   baseText: {
-    color: 'black',
+    color: colors.black,
     fontWeight: '800',
     fontSize: 28,
   },

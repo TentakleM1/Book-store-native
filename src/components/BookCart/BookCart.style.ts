@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { colors } from 'src/styles/colors.styles';
 
 export const styles = StyleSheet.create({
   book: {
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
 
   bookImg: {
     height: 240,
-    backgroundColor: '#F0F4EF',
+    backgroundColor: colors.light,
     borderRadius: 24,
     overflow: 'hidden',
     position: 'relative',

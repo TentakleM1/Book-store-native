@@ -14,13 +14,13 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-export interface ICustomButtonProps extends PressableProps {
+export type CustomButtonPropsType = {
   title: string;
   img?: number;
   backgroundColor?: string;
-}
+} & PressableProps;
 
-export const CustomButton: React.FC<ICustomButtonProps> = props => {
+export const CustomButton: React.FC<CustomButtonPropsType> = props => {
   const opacity = useSharedValue(1);
   const scale = useSharedValue(1);
   const handlePress = (e: GestureResponderEvent) => {

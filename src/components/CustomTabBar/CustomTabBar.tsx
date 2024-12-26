@@ -1,9 +1,9 @@
-import {View} from 'react-native';
+import {Pressable, View} from 'react-native';
 import React from 'react';
 import {IconButton} from '../IconButton/IconButton';
-import images from 'src/assets/imgs/images';
 import {styles} from './CustomTabBar.styles';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import {filterIconTabBar} from './filterIconTabBar';
 
 const CustomTabBar: React.FC<BottomTabBarProps> = props => {
   const {state, navigation} = props;
@@ -22,22 +22,13 @@ const CustomTabBar: React.FC<BottomTabBarProps> = props => {
           }
         };
         return (
-          <View key={index}>
+          <Pressable key={index} onPress={onPress}>
             <IconButton
-              img={
-                route.name === 'Books'
-                  ? images.homeTab
-                  : route.name === 'Profile'
-                  ? images.profileTab
-                  : route.name === 'Favorite'
-                  ? images.unionTab
-                  : images.cartTab
-              }
+              img={filterIconTabBar(route.name)}
               isLike={!isFocused}
               background={'none'}
-              onPress={onPress}
             />
-          </View>
+          </Pressable>
         );
       })}
     </View>

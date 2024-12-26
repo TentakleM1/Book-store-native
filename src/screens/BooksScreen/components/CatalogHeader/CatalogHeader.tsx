@@ -1,16 +1,16 @@
 import React from 'react';
 import {NativeSyntheticEvent, TextInputKeyPressEventData, View} from 'react-native';
-import {Input} from '../Input/Input';
+import {Input} from '../../../../components/Input/Input';
 import images from 'src/assets/imgs/images';
-import {styles} from './Header.style';
+import {styles} from './CatalogHeader.style';
 
-interface IHeaderProps {
+type CatalogHeaderPropsType = {
   value: string;
   onChangeText: (text: string) => void;
   onKeyPress: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
 }
 
-export const Header: React.FC<IHeaderProps> = (props) => {
+export const CatalogHeader: React.FC<CatalogHeaderPropsType> = (props) => {
   return (
     <View style={styles.header}>
       <Input img={images.search} {...props} />

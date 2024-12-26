@@ -7,7 +7,7 @@ interface IUsePaginationData extends IMeta {
   search: string;
 }
 
-export const usePagination = (meta: IUsePaginationData) => {
+export const usePaginationOrRefreshBooks = (meta: IUsePaginationData) => {
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const dispatch = useAppDispatch();

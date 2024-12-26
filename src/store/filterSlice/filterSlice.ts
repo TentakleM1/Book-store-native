@@ -4,20 +4,25 @@ import {getGenresThunk} from './filterThunk';
 interface IGenre {
   id: number;
   name: string;
+  isChecked?: boolean;
 }
 
 interface IInitialStateFilter {
-  filters: IGenre[];
+  filters: IGenre[] | null;
 }
 
 const initialStateFilter: IInitialStateFilter = {
-  filters: [{id: 0, name: ''}],
+  filters: null,
 };
 
 export const filterSlice = createSlice({
   name: 'filter',
   initialState: initialStateFilter,
-  reducers: {},
+  reducers: {
+    changeFilter: (state, action: PayloadAction<IGenre[]>) => {
+      state.filters = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(
       getGenresThunk.fulfilled,
@@ -27,5 +32,7 @@ export const filterSlice = createSlice({
     );
   },
 });
+
+export const {changeFilter} = filterSlice.actions;
 
 export default filterSlice.reducer;

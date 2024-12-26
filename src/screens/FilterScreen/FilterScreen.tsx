@@ -1,65 +1,72 @@
-import React, {useEffect, useState} from 'react';
-import {BackHandler, FlatList, SafeAreaView, Text, View} from 'react-native';
-import {getGenresThunk} from 'src/store/filterSlice/filterThunk';
+import React, {useState} from 'react';
+import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from 'src/store/store';
-import globalStyles from 'src/styles/global.style';
+import globalStyles from 'src/styles/global.styles';
 import {styles} from './Filter.style';
-import {IMeta} from 'src/store/bookSlice/bookSlice';
-import {ParamListBase, RouteProp, useNavigation} from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {CustomButton} from 'src/components/CustomButton/CustomButton';
+import {FilterGenre} from './components/FilterGenre/FilterGenre';
+import {changeFilter} from 'src/store/filterSlice/filterSlice';
 
-interface IFilterGenreProps {
-  id: number;
-  name: string;
-}
-
-const FilterGenre: React.FC<IFilterGenreProps> = props => {
-  return (
-    <View>
-      <Text style={globalStyles.textBigBlack}>{props.name}</Text>
-    </View>
-  );
-};
-
-interface IFilterScreenProps {
-  route: RouteProp<{params: {page: number; search: string}}, 'params'>;
-}
-
-export const FilterScreen: React.FC<IFilterScreenProps> = ({route}) => {
+export const FilterScreen: React.FC = () => {
   const genres = useAppSelector(state => state.filter.filters);
   const dispatch = useAppDispatch();
-  const [filter, setFilter] = useState(route.params);
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const [checkBoxes, setCheckBoxes] = useState(genres ? genres : []);
 
-  useEffect(() => {
-    dispatch(getGenresThunk());
-  }, [dispatch]);
+  const handleCheckboxPress = (checked: boolean, id: number) => {
+    if (id === 0) {
+      setCheckBoxes(
+        checkBoxes.map(item => ({
+          ...item,
+          isChecked: checked,
+        })),
+      );
+      return;
+    }
 
-  useEffect(() => {
-    const backAction = () => {
-      navigation.navigate('Books', filter);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
+    setCheckBoxes(
+      checkBoxes.map(item =>
+        item.id === id ? {...item, isChecked: checked} : item,
+      ),
     );
+  };
 
-    return () => backHandler.remove();
-  }, []);
+  const handleAplly = async () => {
+    await dispatch(changeFilter(checkBoxes));
+    navigation.navigate('Home');
+  };
+
   return (
     <SafeAreaView style={styles.filter}>
-      <View>
-        <Text style={globalStyles.textBigBlack}>Genres</Text>
-        <FlatList
-          data={genres}
-          renderItem={({item}) => <FilterGenre {...item} />}
-          keyExtractor={item => `${item.id}`}
-        />
-      </View>
-      <View>
-        <Text style={globalStyles.textBigBlack}>Price</Text>
+      <FlatList
+        data={[genres]}
+        renderItem={_ => {
+          return (
+            <View style={styles.filterContainer}>
+              <View>
+                <Text style={globalStyles.textBigBlack}>Genres</Text>
+                <FlatList
+                  data={genres}
+                  renderItem={({item}) => (
+                    <FilterGenre {...item} onPress={handleCheckboxPress} />
+                  )}
+                  keyExtractor={item => `${item.id}`}
+                />
+              </View>
+              <View>
+                <Text style={globalStyles.textBigBlack}>Price</Text>
+              </View>
+              <View>
+                <Text style={globalStyles.textBigBlack}>Sort by</Text>
+              </View>
+            </View>
+          );
+        }}
+      />
+      <View style={styles.button}>
+        <CustomButton title={'Apply'} onPress={handleAplly} />
       </View>
     </SafeAreaView>
   );

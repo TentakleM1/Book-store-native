@@ -11,7 +11,7 @@ import {styles} from './Avatar.style';
 import {uploadAvatarThunk} from 'src/store/userSlice/userThunk';
 import {useNavigation} from '@react-navigation/native';
 import images from 'src/assets/imgs/images';
-import globalStyles from 'src/styles/global.style';
+import globalStyles from 'src/styles/global.styles';
 
 export const AvatarScreen: React.FC = () => {
   const dispatch = useAppDispatch();

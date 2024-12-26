@@ -1,19 +1,19 @@
 import React from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {styles} from './Catalog.style';
-import globalStyles from 'src/styles/global.style';
-import {BookCart} from '../BookCart/BookCart';
-import {IconButton} from '../IconButton/IconButton';
+import globalStyles from 'src/styles/global.styles';
+import {BookCart} from 'src/components/BookCart/BookCart';
+import {IconButton} from 'src/components/IconButton/IconButton';
 import images from 'src/assets/imgs/images';
 import {IBook} from 'src/store/bookSlice/bookSlice';
 
-interface ICatalogProps {
+type CatalogPropsType = {
   books: IBook[];
   handleBook: (item: IBook) => void;
   handleFilter: () => void;
 }
 
-export const Catalog: React.FC<ICatalogProps> = props => {
+export const Catalog: React.FC<CatalogPropsType> = props => {
   return (
     <View style={styles.catalog}>
       <View style={styles.catalogTitle}>
@@ -24,17 +24,13 @@ export const Catalog: React.FC<ICatalogProps> = props => {
           onPress={props.handleFilter}
         />
       </View>
-      <View style={styles.catalogBooks}>
+      <View >
         <FlatList
           data={props.books}
           numColumns={2}
-          columnWrapperStyle={{
-            justifyContent: 'space-between',
-            columnGap: 20,
-            marginBottom: 40,
-          }}
+          columnWrapperStyle={styles.catalogBooks}
           renderItem={({item}) => (
-            <BookCart {...item} onPress={() => props.handleBook(item)} />
+            <BookCart book={item} onPress={() => props.handleBook(item)} />
           )}
           keyExtractor={item => `${item.id}`}
         />

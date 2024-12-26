@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
+import { colors } from 'src/styles/colors.styles';
 
 export const styles = StyleSheet.create({
   lable: {
-    color: '#344966',
+    color: colors.darkBlue,
     fontSize: 18,
     fontWeight: '500',
   },

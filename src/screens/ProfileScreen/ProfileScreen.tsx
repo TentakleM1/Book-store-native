@@ -12,7 +12,7 @@ import {useAppDispatch, useAppSelector} from 'src/store/store';
 import {SERVER_URL} from 'src/config/api.config';
 import {Input} from 'src/components/Input/Input';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
-import {Lable} from 'src/components/Lable/Lable';
+import {Label} from 'src/components/Label/Label';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import images from 'src/assets/imgs/images';
@@ -26,7 +26,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
 import {IconButton} from 'src/components/IconButton/IconButton';
-import globalStyles from 'src/styles/global.style';
+import globalStyles from 'src/styles/global.styles';
 import {logout} from 'src/store/userSlice/userSlice';
 
 export const ProfileScreen: React.FC = () => {
@@ -105,7 +105,7 @@ export const ProfileScreen: React.FC = () => {
               uri: `${SERVER_URL}/uploads/avatars/${user?.avatar}`,
               method: 'GET',
             }}
-            style={{width: '100%', height: '100%'}}
+            style={globalStyles.displayFull}
           />
           <View style={styles.avatarButton}>
             <IconButton img={images.camera} onPress={updateAvatar} background={'default'} />
@@ -194,7 +194,7 @@ export const ProfileScreen: React.FC = () => {
                 )}
                 name={'passwordNew'}
               />
-              <Lable
+              <Label
                 title={'Enter your password'}
                 errors={errorsPassword.passwordNew?.message}
               />
@@ -213,7 +213,7 @@ export const ProfileScreen: React.FC = () => {
                 )}
                 name={'passwordReplay'}
               />
-              <Lable
+              <Label
                 title={'Repeat your password without errors'}
                 errors={errorsPassword.passwordReplay?.message}
               />

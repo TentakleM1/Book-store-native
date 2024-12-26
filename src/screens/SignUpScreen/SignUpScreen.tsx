@@ -8,7 +8,7 @@ import styles from './SignUp.styles';
 import {signUpSchema} from 'src/utils/validation/authSchema';
 import {Input} from 'src/components/Input/Input';
 import {Controller, useForm} from 'react-hook-form';
-import {Lable} from 'src/components/Lable/Lable';
+import {Label} from 'src/components/Label/Label';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {ISignUp} from 'src/types/types';
 import {useAppDispatch} from 'src/store/store';
@@ -61,7 +61,7 @@ export const SignUpScreen: React.FC = () => {
             )}
             name={'email'}
           />
-          <Lable title="Email" errors={errors.email?.message} />
+          <Label title="Email" errors={errors.email?.message} />
         </View>
         <View>
           <Controller
@@ -79,7 +79,7 @@ export const SignUpScreen: React.FC = () => {
             )}
             name={'password'}
           />
-          <Lable title="Password" errors={errors.password?.message} />
+          <Label title="Password" errors={errors.password?.message} />
         </View>
         <View>
           <Controller
@@ -98,7 +98,7 @@ export const SignUpScreen: React.FC = () => {
             )}
             name={'passwordReplay'}
           />
-          <Lable
+          <Label
             title="Password replay"
             errors={errors.passwordReplay?.message}
           />

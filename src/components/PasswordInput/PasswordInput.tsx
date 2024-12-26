@@ -3,21 +3,21 @@ import {TextInputProps} from 'react-native';
 import {Input} from '../Input/Input';
 import images from 'src/assets/imgs/images';
 
-export interface IPasswordInputProps extends TextInputProps {}
+export type PasswordInputPropsType = TextInputProps;
 
-export const PasswordInput: React.FC<IPasswordInputProps> = props => {
-  const [isHide, setIsHide] = useState<boolean>(true);
+export const PasswordInput: React.FC<PasswordInputPropsType> = props => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true);
 
   const handleChangeHide = () => {
-    setIsHide(!isHide);
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
     <Input
       {...props}
-      img={isHide ? images.hide : images.view}
-      secureTextEntry={isHide}
-      pressableProps={{onPress: handleChangeHide}}
+      img={isPasswordVisible ? images.hide : images.view}
+      secureTextEntry={isPasswordVisible}
+      onRightIconPress={handleChangeHide}
     />
   );
 };

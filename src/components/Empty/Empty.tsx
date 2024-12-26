@@ -2,17 +2,17 @@ import React from 'react';
 import {Image, Text, View} from 'react-native';
 import images from 'src/assets/imgs/images';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
-import globalStyles from 'src/styles/global.style';
+import globalStyles from 'src/styles/global.styles';
 import {styles} from './Empty.styles';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-interface IEmptyProps {
+type EmptyPropsType = {
   title: string;
   text: string;
 }
 
-export const Empty: React.FC<IEmptyProps> = props => {
+export const Empty: React.FC<EmptyPropsType> = props => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const backCatalog = () => {
@@ -30,7 +30,7 @@ export const Empty: React.FC<IEmptyProps> = props => {
         <View style={styles.emptyImg}>
           <Image
             source={images.books}
-            style={{width: '100%', height: '100%'}}
+            style={globalStyles.displayFull}
           />
         </View>
       </View>

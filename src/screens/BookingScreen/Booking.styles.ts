@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {widthDimensions} from 'src/styles/global.style';
+import { colors } from 'src/styles/colors.styles';
+import {widthDimensions} from 'src/styles/global.styles';
 
 export const styles = StyleSheet.create({
   booking: {
     height: '100%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     display: 'flex',
     alignItems: 'center',
   },
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
   },
 
   bookingTotalBuy: {
-    shadowColor: '#000000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: -20,

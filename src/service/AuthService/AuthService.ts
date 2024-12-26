@@ -1,4 +1,4 @@
-import {authorization, registration} from 'src/api/authApi/authApi';
+import {authorization, registration} from 'src/api/authApi';
 import {ILogin, ISignUp} from 'src/types/types';
 import {TokenService} from '../TokenService/TokenService';
 

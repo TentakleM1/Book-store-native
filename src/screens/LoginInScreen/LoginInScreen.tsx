@@ -9,7 +9,7 @@ import {loginInSchema} from 'src/utils/validation/authSchema';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {Input} from 'src/components/Input/Input';
-import {Lable} from 'src/components/Lable/Lable';
+import {Label} from 'src/components/Label/Label';
 import {ILogin} from 'src/types/types';
 import {loginInThunk} from 'src/store/userSlice/userThunk';
 import {useAppDispatch} from 'src/store/store';
@@ -59,7 +59,7 @@ export const LoginInScreen: React.FC = () => {
             )}
             name={'email'}
           />
-          <Lable title="Email" errors={errors.email?.message} />
+          <Label title="Email" errors={errors.email?.message} />
         </View>
         <View>
           <Controller
@@ -77,7 +77,7 @@ export const LoginInScreen: React.FC = () => {
             )}
             name={'password'}
           />
-          <Lable title="Password" errors={errors.password?.message} />
+          <Label title="Password" errors={errors.password?.message} />
         </View>
         <View style={{width: 200, gap: 20,}}>
           <CustomButton title={'Login in'} onPress={handleSubmit(loginIn)} />

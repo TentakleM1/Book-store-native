@@ -1,12 +1,14 @@
 import {Dimensions, StyleSheet} from 'react-native';
+import { colors } from './colors.styles';
 
 export const widthDimensions = Dimensions.get('window').width - 40;
 export const heightDimensions = Dimensions.get('window').height;
 
 const globalStyles = StyleSheet.create({
+  displayFull: {width: '100%', height: '100%'},
+
   textBigBold: {
-    color: 'black',
-    fontSize: 26,
+    color: colors.black,
     fontWeight: '700',
   },
 

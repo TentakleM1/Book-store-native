@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { widthDimensions } from 'src/styles/global.style';
+import {widthDimensions} from 'src/styles/global.styles';
 
 export const styles = StyleSheet.create({
   catalog: {
@@ -15,6 +15,8 @@ export const styles = StyleSheet.create({
   },
 
   catalogBooks: {
-    flex: 1,
+    justifyContent: 'space-between',
+    columnGap: 20,
+    marginBottom: 40,
   },
 });

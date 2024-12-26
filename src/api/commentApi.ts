@@ -1,4 +1,4 @@
-import {axiosDefault} from '../axiosDefault';
+import {axiosDefault} from './axiosDefault';
 
 export async function addCommentApi(bookId: number, text: string) {
   const response = await axiosDefault.post(`/book/${bookId}`, {

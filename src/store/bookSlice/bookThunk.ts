@@ -6,6 +6,7 @@ export interface IQueryData {
   search: string;
   sortBy?: string;
   maxPrice?: number;
+  genres?: string;
 }
 
 export const getBookFilterThunk = createAsyncThunk(

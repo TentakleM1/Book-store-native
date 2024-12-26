@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {axiosDefault} from '../axiosDefault';
+import {axiosDefault} from './axiosDefault';
 import {TokenService} from 'src/service/TokenService/TokenService';
 import {SERVER_URL} from 'src/config/api.config';
 import {IUpdatePassword, IUpdateProfile} from 'src/screens/ProfileScreen/types';
@@ -38,7 +38,7 @@ axiosDefault.interceptors.response.use(
   },
 );
 
-const refreshTokenApi = async () => {
+export const refreshTokenApi = async () => {
   try {
     const refresh_token = await TokenService.getRefreshToken();
     const res = await axios.get<

@@ -1,30 +1,26 @@
 import React from 'react';
-import {
-  Image,
-  Pressable,
-  PressableProps,
-  TextInput,
-  TextInputProps,
-  View,
-} from 'react-native';
+import {Image, Pressable, TextInput, TextInputProps, View} from 'react-native';
 import styles from './Input.styles';
 
-export interface IInputProps extends TextInputProps {
+export type InputPropsType = {
   img: number;
-  pressableProps?: PressableProps;
-}
+  onRightIconPress?: () => void;
+} & TextInputProps;
 
-export const Input: React.FC<IInputProps> = props => {
+export const Input: React.FC<InputPropsType> = props => {
   return (
     <View style={styles.input__container}>
-      <Pressable {...props.pressableProps}>
-        <Image source={props.img} />
-      </Pressable>
+      {!props.onRightIconPress && <Image source={props.img} />}
       <TextInput
         {...props}
         style={styles.input}
         placeholderTextColor={'#B9BAC3'}
       />
+      {props.onRightIconPress && (
+        <Pressable onPress={props.onRightIconPress}>
+          <Image source={props.img} />
+        </Pressable>
+      )}
     </View>
   );
 };

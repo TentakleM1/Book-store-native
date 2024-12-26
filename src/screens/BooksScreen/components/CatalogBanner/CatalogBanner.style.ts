@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
-import { widthDimensions } from 'src/styles/global.style';
+import { colors } from 'src/styles/colors.styles';
+import { widthDimensions } from 'src/styles/global.styles';
 
 export const styles = StyleSheet.create({
   banner: {
@@ -10,7 +11,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'rgb(229, 231, 228)',
+    backgroundColor: colors.light,
     borderRadius: 16,
   },
 
