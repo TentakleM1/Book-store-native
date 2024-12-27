@@ -80,7 +80,7 @@ export const LoginInScreen: React.FC = () => {
           />
           <Label title="Password" errors={errors.password?.message} />
         </View>
-        <View style={{width: 200, gap: 20}}>
+        <View style={styles.loginButton}>
           <CustomButton title={'Login in'} onPress={handleSubmit(loginIn)} />
           <CustomButton title={'Sign up'} onPress={handleChangeScreen} />
         </View>

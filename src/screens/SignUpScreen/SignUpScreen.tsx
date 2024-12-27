@@ -103,7 +103,7 @@ export const SignUpScreen: React.FC = () => {
             errors={errors.passwordReplay?.message}
           />
         </View>
-        <View style={{width: 200, gap: 20}}>
+        <View style={styles.signButton}>
           <CustomButton title={'Sign up'} onPress={handleSubmit(signUp)} />
           <CustomButton title={'Login in'} onPress={handleChangeScreen} />
         </View>

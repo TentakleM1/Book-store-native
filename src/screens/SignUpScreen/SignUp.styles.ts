@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     width: 88,
     height: 46,
   },
+
+  signButton: {
+    width: 200,
+    gap: 20,
+  },
 });
 
 export default styles;

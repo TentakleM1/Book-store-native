@@ -73,13 +73,12 @@ export const userSlice = createSlice({
         uploadAvatarThunk.fulfilled,
         (state, action: PayloadAction<{filename: string}>) => {
           if (state.user) {
-            console.log(action.payload);
             state.user = {...state.user, avatar: action.payload.filename};
           }
         },
       )
       .addCase(updatePasswordThunk.fulfilled, () => {
-        console.log('good');
+        console.log('Password changed');
       });
   },
 });

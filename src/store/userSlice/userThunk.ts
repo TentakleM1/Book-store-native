@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import { IUpdatePassword, IUpdateProfile } from 'src/screens/ProfileScreen/types';
+import {IUpdatePassword, IUpdateProfile} from 'src/screens/ProfileScreen/types';
 import {AuthService} from 'src/service/AuthService/AuthService';
 import {UserService} from 'src/service/UserService/UserService';
 import {ILogin, ISignUp} from 'src/types/types';

@@ -3,7 +3,10 @@ import {SERVER_URL} from 'src/config/api.config';
 import {TokenService} from 'src/service/TokenService/TokenService';
 import {refreshTokenApi} from './userApi';
 
-let refreshTokenProcess = null;
+let refreshTokenProcess: {
+  access_token: string;
+  refresh_token: string;
+} | null = null;
 
 export const axiosDefault = axios.create({
   baseURL: SERVER_URL,
@@ -12,10 +15,12 @@ export const axiosDefault = axios.create({
   },
 });
 
+// axiosDefault.defaults.headers.common['Authorization'] = `Bearer ${TokenService.getAccessToken()}`;
+
 axiosDefault.interceptors.request.use(
   async req => {
     await refreshTokenProcess;
-    req.headers.authorization = `Bearer ${TokenService.getAccessToken()}`;
+    console.log(req.headers.Authorization)
     return req;
   },
   error => {
@@ -30,18 +35,18 @@ axiosDefault.interceptors.response.use(
     if (err.response) {
       if (err.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
-        refreshTokenProcess = await refreshTokenApi();
+        try {
+          refreshTokenProcess = await refreshTokenApi();
 
-        if (!refreshTokenProcess) {
+          if (refreshTokenProcess !== null && refreshTokenProcess) {
+            TokenService.setTokens(refreshTokenProcess);
+            return axiosDefault(originalRequest);
+          }
+        } catch (error) {
+          TokenService.clearTokens();
           return Promise.reject(err);
         }
-        TokenService.setTokens(
-          refreshTokenProcess.access_token,
-          refreshTokenProcess.refresh_token,
-        );
-        return axiosDefault(originalRequest);
       }
     }
-    return Promise.reject(err);
   },
 );

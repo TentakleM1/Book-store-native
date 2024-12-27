@@ -14,7 +14,10 @@ import {
   profileUpdateSchema,
 } from 'src/utils/validation/userSchema';
 import {IUpdatePassword, IUpdateProfile} from './types';
-import {updateProfileThunk} from 'src/store/userSlice/userThunk';
+import {
+  updatePasswordThunk,
+  updateProfileThunk,
+} from 'src/store/userSlice/userThunk';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
@@ -77,17 +80,16 @@ export const ProfileScreen: React.FC = () => {
   };
 
   const updateProfile = async (data: IUpdateProfile) => {
-    dispatch(updateProfileThunk(data));
+    await dispatch(updateProfileThunk(data));
   };
 
-  const updatePassword = (data: IUpdatePassword) => {
-    console.log(data);
+  const updatePassword = async (data: IUpdatePassword) => {
+    await dispatch(updatePasswordThunk(data));
   };
 
   const updateAvatar = () => {
     navigation.navigate('Avatar');
   };
-
   const logoutUser = () => {
     dispatch(logout());
   };

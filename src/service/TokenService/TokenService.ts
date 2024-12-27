@@ -1,7 +1,9 @@
 import SecureStorage from 'react-native-fast-secure-storage';
+import {axiosDefault} from 'src/api/axiosDefault';
 
 export class TokenService {
   static setAccessToken(access_token: string) {
+    this.observer(access_token);
     SecureStorage.setItemSync('access_token', access_token);
   }
 
@@ -9,9 +11,9 @@ export class TokenService {
     SecureStorage.setItemSync('refresh_token', refresh_token);
   }
 
-  static setTokens(access_token: string, refresh_token: string) {
-    this.setAccessToken(access_token);
-    this.setRefreshToken(refresh_token);
+  static setTokens(tokens: {access_token: string; refresh_token: string}) {
+    this.setAccessToken(tokens.access_token);
+    this.setRefreshToken(tokens.refresh_token);
   }
 
   static getAccessToken() {
@@ -24,5 +26,9 @@ export class TokenService {
 
   static clearTokens() {
     SecureStorage.clearStorage();
+  }
+
+  static observer(access_token: string) {
+    axiosDefault.defaults.headers.common.Authorization = `Bearer ${access_token}`;
   }
 }

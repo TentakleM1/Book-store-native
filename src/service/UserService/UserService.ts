@@ -14,7 +14,7 @@ export class UserService {
 
   static async updateProfile(user: IUpdateProfile) {
     const data = await updateProfileApi(user);
-    return data.user;
+    return data;
   }
 
   static async uploadAvatar(base64Data: string) {
@@ -25,4 +25,5 @@ export class UserService {
     delete passwords.passwordReplay;
     await updatePasswordApi(passwords);
   }
+
 }

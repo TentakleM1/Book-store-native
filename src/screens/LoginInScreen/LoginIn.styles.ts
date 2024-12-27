@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { colors } from 'src/styles/colors.styles';
+import {colors} from 'src/styles/colors.styles';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
   logo: {
     width: 88,
     height: 46,
+  },
+
+  loginButton: {
+    width: 200,
+    gap: 20,
   },
 });
 
