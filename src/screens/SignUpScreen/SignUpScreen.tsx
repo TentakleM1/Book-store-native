@@ -14,6 +14,7 @@ import {ISignUp} from 'src/types/types';
 import {useAppDispatch} from 'src/store/store';
 import {signUpThunk} from 'src/store/userSlice/userThunk';
 import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
+import Camera from 'src/assets/svg/camera.svg';
 
 export const SignUpScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -55,7 +56,7 @@ export const SignUpScreen: React.FC = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={images.mail}
+                img={<Camera />}
                 placeholder="Email"
               />
             )}
@@ -88,11 +89,10 @@ export const SignUpScreen: React.FC = () => {
               required: true,
             }}
             render={({field: {onChange, onBlur, value}}) => (
-              <Input
+              <PasswordInput
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={images.hide}
                 placeholder="Password replay"
               />
             )}

@@ -8,4 +8,8 @@ export const styles = StyleSheet.create({
   like: {
     opacity: 0.7,
   },
+
+  buttonFulltRadius: {
+    borderRadius: 100,
+  },
 });

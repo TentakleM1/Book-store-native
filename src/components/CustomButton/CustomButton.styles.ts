@@ -1,25 +1,24 @@
 import {StyleSheet} from 'react-native';
+import {colors} from 'src/styles/colors.styles';
 
-const styles = StyleSheet.create({
-  button: {
-    height: 45,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+export const getStyles = (isBackground?: boolean) => {
+  return StyleSheet.create({
+    button: {
+      height: 45,
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      columnGap: 20,
+      backgroundColor: isBackground ? colors.light : colors.darkBlue,
+      borderRadius: 16,
+    },
 
-  buttonDefaultRadius: {
-    borderRadius: 16,
-  },
+    buttonText: {
+      fontSize: 16,
+      fontWeight: '500',
+    },
+  });
+};
 
-  buttonFulltRadius: {
-    borderRadius: 100,
-  },
-
-  buttonText: {
-    fontSize: 16,
-    fontWeight: '500',
-  },
-});
-
-export default styles;
+export default getStyles;

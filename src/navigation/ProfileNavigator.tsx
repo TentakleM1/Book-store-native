@@ -1,13 +1,15 @@
 import React from 'react';
-import {Stack} from '.';
 import {ProfileScreen} from 'src/screens/ProfileScreen/ProfileScreen';
 import {AvatarScreen} from 'src/screens/AvatarScreen/AvatarScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const StackProfile = createNativeStackNavigator();
 
 export function ProfileNavigator() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Settings" component={ProfileScreen} />
-      <Stack.Screen name="Avatar" component={AvatarScreen} />
-    </Stack.Navigator>
+    <StackProfile.Navigator screenOptions={{headerShown: false}}>
+      <StackProfile.Screen name="Settings" component={ProfileScreen} />
+      <StackProfile.Screen name="Avatar" component={AvatarScreen} />
+    </StackProfile.Navigator>
   );
 }

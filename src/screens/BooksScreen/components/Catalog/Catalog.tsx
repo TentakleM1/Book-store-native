@@ -1,30 +1,33 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {styles} from './Catalog.style';
 import globalStyles from 'src/styles/global.styles';
 import {BookCart} from 'src/components/BookCart/BookCart';
 import {IconButton} from 'src/components/IconButton/IconButton';
-import images from 'src/assets/imgs/images';
 import {IBook} from 'src/store/bookSlice/bookSlice';
+import {CustomText} from 'src/components/CustomText/CustomText';
+import Filter from 'src/assets/svg/filter.svg';
 
 type CatalogPropsType = {
   books: IBook[];
   handleBook: (item: IBook) => void;
   handleFilter: () => void;
-}
+};
 
 export const Catalog: React.FC<CatalogPropsType> = props => {
   return (
     <View style={styles.catalog}>
       <View style={styles.catalogTitle}>
-        <Text style={globalStyles.textBigBold}>Catalog</Text>
+        <CustomText h2 style={globalStyles.textBigBold}>
+          Catalog
+        </CustomText>
         <IconButton
-          img={images.filter}
-          background={'light'}
+          img={<Filter />}
+          isBackground
           onPress={props.handleFilter}
         />
       </View>
-      <View >
+      <View>
         <FlatList
           data={props.books}
           numColumns={2}

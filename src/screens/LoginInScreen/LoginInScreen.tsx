@@ -14,6 +14,7 @@ import {ILogin} from 'src/types/types';
 import {loginInThunk} from 'src/store/userSlice/userThunk';
 import {useAppDispatch} from 'src/store/store';
 import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
+import Camera from 'src/assets/svg/camera.svg';
 
 export const LoginInScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -53,7 +54,7 @@ export const LoginInScreen: React.FC = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={images.mail}
+                img={<Camera />}
                 placeholder="Email"
               />
             )}
@@ -79,7 +80,7 @@ export const LoginInScreen: React.FC = () => {
           />
           <Label title="Password" errors={errors.password?.message} />
         </View>
-        <View style={{width: 200, gap: 20,}}>
+        <View style={{width: 200, gap: 20}}>
           <CustomButton title={'Login in'} onPress={handleSubmit(loginIn)} />
           <CustomButton title={'Sign up'} onPress={handleChangeScreen} />
         </View>

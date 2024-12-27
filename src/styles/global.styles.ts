@@ -20,19 +20,16 @@ const globalStyles = StyleSheet.create({
 
   textBigBlack: {
     color: 'black',
-    fontSize: 26,
     fontWeight: '500',
   },
 
   textMiddle: {
     color: '#344966',
-    fontSize: 18,
     fontWeight: '500',
   },
 
   textMiddleLight: {
     color: '#B9BAC3',
-    fontSize: 18,
     fontWeight: '500',
   },
 

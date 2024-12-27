@@ -1,17 +1,19 @@
 import React from 'react';
-import {Stack} from '.';
 import {TabNavigator} from './TabNavigator';
 import {AvatarScreen} from 'src/screens/AvatarScreen/AvatarScreen';
 import {BookScreen} from 'src/screens/BookScreen/BookScreen';
 import {FilterScreen} from 'src/screens/FilterScreen/FilterScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const StackBooks = createNativeStackNavigator();
 
 export function BooksNavigator() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Home" component={TabNavigator} />
-      <Stack.Screen name="Book" component={BookScreen} />
-      <Stack.Screen name="Avatar" component={AvatarScreen} />
-      <Stack.Screen name="Filter" component={FilterScreen} />
-    </Stack.Navigator>
+    <StackBooks.Navigator screenOptions={{headerShown: false}}>
+      <StackBooks.Screen name="Home" component={TabNavigator} />
+      <StackBooks.Screen name="Book" component={BookScreen} />
+      <StackBooks.Screen name="Avatar" component={AvatarScreen} />
+      <StackBooks.Screen name="Filter" component={FilterScreen} />
+    </StackBooks.Navigator>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, View} from 'react-native';
 import {styles} from './CatalogBanner.style';
 import images from 'src/assets/imgs/images';
 import {CustomButton} from '../../../../components/CustomButton/CustomButton';
@@ -13,10 +13,8 @@ export const CatalogBanner: React.FC = () => {
         <Image source={images.books} />
       </View>
       <View style={styles.bannerTitle}>
-        <CustomText h1 style={globalStyles.textBigBold}>Build your library with us</CustomText>
-        <Text style={globalStyles.textMiddle}>
-          Buy two books and get one for free
-        </Text>
+        <CustomText h2 style={globalStyles.textBigBold}>Build your library with us</CustomText>
+        <CustomText h3 style={globalStyles.textMiddle}> Buy two books and get one for free</CustomText>
         <CustomButton title={'Choose a book'} />
       </View>
       <View>

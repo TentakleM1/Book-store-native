@@ -15,7 +15,7 @@ import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import {Label} from 'src/components/Label/Label';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import images from 'src/assets/imgs/images';
+import Camera from 'src/assets/svg/camera.svg';
 import {
   passwordUpdateSchema,
   profileUpdateSchema,
@@ -108,7 +108,11 @@ export const ProfileScreen: React.FC = () => {
             style={globalStyles.displayFull}
           />
           <View style={styles.avatarButton}>
-            <IconButton img={images.camera} onPress={updateAvatar} background={'default'} />
+            <IconButton
+              img={<Camera />}
+              onPress={updateAvatar}
+              background={'default'}
+            />
           </View>
         </View>
         <View style={styles.information}>
@@ -128,7 +132,7 @@ export const ProfileScreen: React.FC = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={images.profile}
+                img={<Camera />}
                 placeholder="Full name"
               />
             )}
@@ -144,7 +148,7 @@ export const ProfileScreen: React.FC = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={images.mail}
+                img={<Camera />}
                 placeholder="Email"
               />
             )}

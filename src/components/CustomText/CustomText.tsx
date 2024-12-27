@@ -10,7 +10,7 @@ type CustomTextPropsType = {
   h5?: boolean;
   bold?: boolean;
   title?: string;
-  style: Record<string, string | number>;
+  style?: Record<string, string | number>;
   children: ReactNode
 };
 

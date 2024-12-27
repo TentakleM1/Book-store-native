@@ -7,7 +7,6 @@ export const getBookApi = async (id: number) => {
 };
 
 export const getBookFilterApi = async (query: IQueryData) => {
-  console.log('>>>>>>>>>>>>>>', query)
   const res = await axiosDefault.get('/books', {params: query});
   return res.data;
 };

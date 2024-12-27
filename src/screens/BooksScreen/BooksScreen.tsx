@@ -5,6 +5,7 @@ import {
   NativeSyntheticEvent,
   RefreshControl,
   SafeAreaView,
+  Text,
   TextInputKeyPressEventData,
   View,
 } from 'react-native';
@@ -19,6 +20,7 @@ import {addBook, IBook} from 'src/store/bookSlice/bookSlice';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {usePaginationOrRefreshBooks} from './usePaginationOrRefreshBooks';
 import {getGenresThunk} from 'src/store/filterSlice/filterThunk';
+import { LikeButton } from 'src/components/LikeButtom/LikeButton';
 
 export const BooksScreen: React.FC = () => {
   const {books, meta} = useAppSelector(state => state.book);
@@ -53,7 +55,6 @@ export const BooksScreen: React.FC = () => {
   }, [dispatch, filter, genres]);
 
   useEffect(() => {
-      console.log('work')
       dispatch(getBookFilterThunk(filter));
   }, [dispatch, filter]);
 

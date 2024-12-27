@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import { colors } from 'src/styles/colors.styles';
-import { widthDimensions } from 'src/styles/global.styles';
+import {colors} from 'src/styles/colors.styles';
+import {widthDimensions} from 'src/styles/global.styles';
 
 export const styles = StyleSheet.create({
   banner: {
@@ -25,5 +25,9 @@ export const styles = StyleSheet.create({
     right: 0,
     top: 10,
     opacity: 0.3,
+  },
+
+  text: {
+    color: colors.black,
   },
 });

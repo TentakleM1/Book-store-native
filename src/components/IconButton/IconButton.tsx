@@ -1,37 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {CustomButton, CustomButtonPropsType} from '../CustomButton/CustomButton';
-import {GestureResponderEvent, View} from 'react-native';
+import {View} from 'react-native';
 import {styles} from './IconButton.styles';
 
-type IconButtonPropsType = {
-  background: 'default' | 'none' | 'light';
-  isLike?: boolean;
-} & Omit<CustomButtonPropsType, 'title' | 'backgroundColor'>;
+export type IconButtonPropsType = CustomButtonPropsType;
 
 export const IconButton: React.FC<IconButtonPropsType> = props => {
-  const [isLike, setIsLike] = useState<boolean>(
-    props.isLike ? props.isLike : false,
-  );
-  const onPress = (e: GestureResponderEvent) => {
-    if (props.isLike !== undefined) {
-      setIsLike(!isLike);
-    }
-    props.onPress && props.onPress(e);
-  };
-
   return (
-    <View style={[styles.iconButton, isLike && styles.like]}>
+    <View style={[styles.iconButton]}>
       <CustomButton
         {...props}
-        backgroundColor={
-          props.background === 'default'
-            ? '#344966'
-            : props.background === 'light'
-            ? '#F0F4EF'
-            : ''
-        }
-        onPress={onPress}
-        title="icon"
+        isBackground={props.isBackground}
+        styles={styles.buttonFulltRadius}
+        onPress={props.onPress}
       />
     </View>
   );
