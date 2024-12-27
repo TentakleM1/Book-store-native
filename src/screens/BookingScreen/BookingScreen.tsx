@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {FlatList, SafeAreaView, View} from 'react-native';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import {Empty} from 'src/components/Empty/Empty';
 import globalStyles from 'src/styles/global.styles';
@@ -7,6 +7,7 @@ import {styles} from './Booking.styles';
 import {useAppDispatch, useAppSelector} from 'src/store/store';
 import {BookingBook} from './components/BookingBook/BookingBook';
 import {getCartThunk} from 'src/store/bookingSlice/bookingThunk';
+import { CustomText } from 'src/components/CustomText/CustomText';
 
 // const genres = checkBoxes.filter(genre => {
 //   if (genre.isChecked) {
@@ -45,9 +46,9 @@ export const BookingScreen: React.FC = () => {
         />
         {cartItems.length > 0 && (
           <View style={styles.bookingTotalBuy}>
-            <Text style={globalStyles.textBig}>
-              Total: <Text style={globalStyles.textBigBold}>34.98</Text>
-            </Text>
+            <CustomText h2 style={globalStyles.textBlack}>
+              Total: <CustomText h2 style={globalStyles.textBigBold}>34.98</CustomText>
+            </CustomText>
             <CustomButton title={'Continue shopping'} />
             <CustomButton title={'Chekout'} />
           </View>

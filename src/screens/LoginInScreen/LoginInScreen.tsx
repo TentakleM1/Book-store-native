@@ -14,7 +14,7 @@ import {ILogin} from 'src/types/types';
 import {loginInThunk} from 'src/store/userSlice/userThunk';
 import {useAppDispatch} from 'src/store/store';
 import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
-import Camera from 'src/assets/svg/camera.svg';
+import Mail from 'src/assets/svg/mail.svg';
 
 export const LoginInScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -54,7 +54,7 @@ export const LoginInScreen: React.FC = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={<Camera />}
+                img={Mail}
                 placeholder="Email"
               />
             )}

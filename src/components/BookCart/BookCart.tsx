@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
+import {Image, Pressable, View} from 'react-native';
 import {styles} from './BookCart.style';
 import globalStyles from 'src/styles/global.styles';
 import {SERVER_URL} from 'src/config/api.config';
 import {CustomButton} from '../CustomButton/CustomButton';
 import {IBook} from 'src/store/bookSlice/bookSlice';
 import {LikeButton} from '../LikeButtom/LikeButton';
+import {CustomText} from '../CustomText/CustomText';
 
 type BookCartPropsType = {
   book: IBook;
@@ -31,7 +32,7 @@ export const BookCart: React.FC<BookCartPropsType> = props => {
             style={globalStyles.displayFull}
           />
           <View style={styles.favoriteButton}>
-            <LikeButton isLike onPress={handleLikeBook} />
+            <LikeButton isLike={isLikeBook} onPress={handleLikeBook} />
           </View>
           <View style={styles.infoButton}>
             {props.book.isNew && <CustomButton title="New" disabled={true} />}
@@ -42,10 +43,8 @@ export const BookCart: React.FC<BookCartPropsType> = props => {
         </Pressable>
       </View>
       <View style={styles.bookContent}>
-        <Text style={globalStyles.textBig}>{props.book.name}</Text>
-        <Text style={globalStyles.textMiddleLight}>
-          {props.book.author.text}
-        </Text>
+        <CustomText h3 style={globalStyles.textBlue} >{props.book.name}</CustomText>
+        <CustomText h4 style={globalStyles.textLight} >{props.book.author.text}</CustomText>
       </View>
       <CustomButton title={`$ ${props.book.cover.hardcover_price} USD`} />
     </View>

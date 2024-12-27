@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  Image,
-  ScrollView,
-  Pressable,
-} from 'react-native';
+import {SafeAreaView, View, Image, ScrollView, Pressable} from 'react-native';
 import styles from './Profile.styles';
 import {useAppDispatch, useAppSelector} from 'src/store/store';
 import {SERVER_URL} from 'src/config/api.config';
@@ -28,6 +21,9 @@ import {PasswordInput} from 'src/components/PasswordInput/PasswordInput';
 import {IconButton} from 'src/components/IconButton/IconButton';
 import globalStyles from 'src/styles/global.styles';
 import {logout} from 'src/store/userSlice/userSlice';
+import {CustomText} from 'src/components/CustomText/CustomText';
+import User from 'src/assets/svg/user.svg';
+import Mail from 'src/assets/svg/mail.svg';
 
 export const ProfileScreen: React.FC = () => {
   const user = useAppSelector(state =>
@@ -108,18 +104,18 @@ export const ProfileScreen: React.FC = () => {
             style={globalStyles.displayFull}
           />
           <View style={styles.avatarButton}>
-            <IconButton
-              img={<Camera />}
-              onPress={updateAvatar}
-              background={'default'}
-            />
+            <IconButton img={<Camera />} onPress={updateAvatar} />
           </View>
         </View>
         <View style={styles.information}>
           <View style={styles.titleChange}>
-            <Text style={globalStyles.textBigBlack}>Personal information</Text>
+            <CustomText h2 style={globalStyles.textBigBold}>
+              Personal information
+            </CustomText>
             <Pressable onPress={openChangeProfile}>
-              <Text style={styles.textChange}>Change information</Text>
+              <CustomText h4 style={styles.textChange}>
+                Change information
+              </CustomText>
             </Pressable>
           </View>
           <Controller
@@ -132,7 +128,7 @@ export const ProfileScreen: React.FC = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={<Camera />}
+                img={User}
                 placeholder="Full name"
               />
             )}
@@ -148,7 +144,7 @@ export const ProfileScreen: React.FC = () => {
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
-                img={<Camera />}
+                img={Mail}
                 placeholder="Email"
               />
             )}
@@ -161,9 +157,13 @@ export const ProfileScreen: React.FC = () => {
             />
           )}
           <View style={styles.titleChange}>
-            <Text style={globalStyles.textBigBlack}>Password</Text>
+            <CustomText h2 style={globalStyles.textBigBold}>
+              Password
+            </CustomText>
             <Pressable onPress={openChangePassword}>
-              <Text style={styles.textChange}>Change information</Text>
+              <CustomText h4 style={styles.textChange}>
+                Change information
+              </CustomText>
             </Pressable>
           </View>
           <Controller

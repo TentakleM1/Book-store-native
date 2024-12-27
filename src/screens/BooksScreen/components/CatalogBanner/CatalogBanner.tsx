@@ -14,7 +14,7 @@ export const CatalogBanner: React.FC = () => {
       </View>
       <View style={styles.bannerTitle}>
         <CustomText h2 style={globalStyles.textBigBold}>Build your library with us</CustomText>
-        <CustomText h3 style={globalStyles.textMiddle}> Buy two books and get one for free</CustomText>
+        <CustomText h3 style={globalStyles.textBlue}> Buy two books and get one for free</CustomText>
         <CustomButton title={'Choose a book'} />
       </View>
       <View>

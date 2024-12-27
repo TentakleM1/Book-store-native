@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import { colors } from './colors.styles';
+import {colors} from './colors.styles';
 
 export const widthDimensions = Dimensions.get('window').width - 40;
 export const heightDimensions = Dimensions.get('window').height;
@@ -12,24 +12,18 @@ const globalStyles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  textBig: {
-    color: '#344966',
-    fontSize: 26,
+  textBlack: {
+    color: colors.black,
     fontWeight: '500',
   },
 
-  textBigBlack: {
-    color: 'black',
+  textBlue: {
+    color: colors.darkBlue,
     fontWeight: '500',
   },
 
-  textMiddle: {
-    color: '#344966',
-    fontWeight: '500',
-  },
-
-  textMiddleLight: {
-    color: '#B9BAC3',
+  textLight: {
+    color: colors.lightGrey,
     fontWeight: '500',
   },
 

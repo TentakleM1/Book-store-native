@@ -1,14 +1,14 @@
-import {Pressable} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
-import {IconButton} from '../IconButton/IconButton';
 import {styles} from './CustomTabBar.styles';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import { FilterIconTabBar } from './FilterIconTabBar';
+import {FilterIconTabBar} from './FilterIconTabBar';
+import {FocusButton} from './components/FocusButton/FocusButton';
 
 const CustomTabBar: React.FC<BottomTabBarProps> = props => {
   const {state, navigation} = props;
   return (
-    <Pressable style={styles.customTabBar}>
+    <View style={styles.customTabBar}>
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
         const onPress = () => {
@@ -21,9 +21,16 @@ const CustomTabBar: React.FC<BottomTabBarProps> = props => {
             navigation.navigate(route.name);
           }
         };
-        return <IconButton key={index} img={FilterIconTabBar(route.name)} />;
+        return (
+          <FocusButton
+            key={index}
+            img={FilterIconTabBar(route.name)}
+            onPress={onPress}
+            isFocus={isFocused}
+          />
+        );
       })}
-    </Pressable>
+    </View>
   );
 };
 

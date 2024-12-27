@@ -1,9 +1,9 @@
-import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios from 'axios';
 import {SERVER_URL} from 'src/config/api.config';
 import {TokenService} from 'src/service/TokenService/TokenService';
 import {refreshTokenApi} from './userApi';
 
-let refresh = null;
+let refreshTokenProcess = null;
 
 export const axiosDefault = axios.create({
   baseURL: SERVER_URL,
@@ -13,11 +13,9 @@ export const axiosDefault = axios.create({
 });
 
 axiosDefault.interceptors.request.use(
-  req => {
-    const token = TokenService.getAccessToken();
-    if (token) {
-      req.headers.authorization = `Bearer ${token}`;
-    }
+  async req => {
+    await refreshTokenProcess;
+    req.headers.authorization = `Bearer ${TokenService.getAccessToken()}`;
     return req;
   },
   error => {
@@ -25,47 +23,22 @@ axiosDefault.interceptors.request.use(
   },
 );
 
-let isRefreshToken = false;
-let requestQueue: Array<{
-  resolve: (value: AxiosResponse | PromiseLike<AxiosResponse>) => void;
-  reject: (err?: any) => void;
-  config: AxiosRequestConfig;
-}> = [];
-
-
-const processQueue = (error: any) => {
-  requestQueue.forEach(action => {
-    if (error) {
-      action.reject(error);
-    } else {
-      action.resolve(axiosDefault(action.config));
-    }
-  });
-
-  requestQueue = [];
-};
-
 axiosDefault.interceptors.response.use(
   res => res,
   async err => {
     const originalRequest = err.config;
     if (err.response) {
       if (err.response.status === 401 && !originalRequest._retry) {
-        if (isRefreshToken) {
-          return new Promise((resolve, reject) => {
-            requestQueue.push({resolve, reject, config: originalRequest});
-          });
-        }
-        isRefreshToken = true;
         originalRequest._retry = true;
-        const tokens = await refreshTokenApi();
-        if (!tokens) {
+        refreshTokenProcess = await refreshTokenApi();
+
+        if (!refreshTokenProcess) {
           return Promise.reject(err);
         }
-        TokenService.setTokens(tokens.access_token, tokens.refresh_token);
-        axiosDefault.defaults.headers.common.authorization = `Bearer ${tokens.access_token}`;
-        processQueue(null);
-        isRefreshToken = false;
+        TokenService.setTokens(
+          refreshTokenProcess.access_token,
+          refreshTokenProcess.refresh_token,
+        );
         return axiosDefault(originalRequest);
       }
     }

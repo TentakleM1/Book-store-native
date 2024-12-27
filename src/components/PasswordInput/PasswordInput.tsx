@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {TextInputProps} from 'react-native';
 import {Input} from '../Input/Input';
-import Camera from 'src/assets/svg/camera.svg';
+import View from 'src/assets/svg/view.svg';
+import Hide from 'src/assets/svg/hide.svg';
 
 export type PasswordInputPropsType = TextInputProps;
 
@@ -15,7 +16,7 @@ export const PasswordInput: React.FC<PasswordInputPropsType> = props => {
   return (
     <Input
       {...props}
-      img={<Camera />}
+      img={isPasswordVisible ? Hide : View}
       secureTextEntry={isPasswordVisible}
       onRightIconPress={handleChangeHide}
     />

@@ -36,9 +36,8 @@ const styles = StyleSheet.create({
   },
 
   textChange: {
-    color: colors.dark_green,
+    color: colors.darkGreen,
     textDecorationLine: 'underline',
-    fontSize: 18,
     fontWeight: '700',
   },
 });

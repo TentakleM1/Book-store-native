@@ -1,10 +1,13 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, View} from 'react-native';
 import globalStyles from 'src/styles/global.styles';
 import {styles} from './BookingBook.style';
 import {SERVER_URL} from 'src/config/api.config';
 import {IconButton} from 'src/components/IconButton/IconButton';
-import Camera from 'src/assets/svg/camera.svg';
+import Delete from 'src/assets/svg/delete.svg';
+import Plus from 'src/assets/svg/plus.svg';
+import Minus from 'src/assets/svg/minus.svg';
+import { CustomText } from 'src/components/CustomText/CustomText';
 
 export const BookingBook: React.FC = () => {
   return (
@@ -20,17 +23,17 @@ export const BookingBook: React.FC = () => {
       </View>
       <View style={styles.bookContent}>
         <View>
-          <Text style={globalStyles.textBigBold}>The Weight of Things</Text>
-          <Text style={globalStyles.textMiddle}>Marianne Flitz</Text>
+          <CustomText h2 style={globalStyles.textBigBold}>The Weight of Things</CustomText>
+          <CustomText h3 style={globalStyles.textBlack}>Marianne Flitz</CustomText>
         </View>
         <View style={styles.bookSetting}>
-          <IconButton img={<Camera />} background="light" />
-          <Text style={globalStyles.textMiddle}>1</Text>
-          <IconButton img={<Camera />} background="light" />
-          <IconButton img={<Camera />} background="none" />
+          <IconButton img={Minus} isBackground />
+          <CustomText h3 style={globalStyles.textBlack}>1</CustomText>
+          <IconButton img={Plus} isBackground />
+          <IconButton img={Delete} isBackground />
         </View>
         <View>
-          <Text style={globalStyles.textBig}>$14.99 USD</Text>
+          <CustomText h3 style={globalStyles.textBlack}>$14.99 USD</CustomText>
         </View>
       </View>
     </View>

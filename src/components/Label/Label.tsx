@@ -9,6 +9,6 @@ type LablePropsType = {
 
 export const Label: React.FC<LablePropsType> = props => (
   <Text style={getStyles(props.errors ? true : false).lable}>
-    {props.errors ? props.errors : props.title}
+    {props.errors ? props.errors : <>Enter your {props.title}</>}
   </Text>
 );
