@@ -15,12 +15,9 @@ export const axiosDefault = axios.create({
   },
 });
 
-// axiosDefault.defaults.headers.common['Authorization'] = `Bearer ${TokenService.getAccessToken()}`;
-
 axiosDefault.interceptors.request.use(
   async req => {
     await refreshTokenProcess;
-    console.log(req.headers.Authorization)
     return req;
   },
   error => {
