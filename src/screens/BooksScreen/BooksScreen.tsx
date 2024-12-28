@@ -24,15 +24,11 @@ export const BooksScreen: React.FC = () => {
   const {books, meta} = useAppSelector(state => state.book);
   const genres = useAppSelector(state => state.filter.filters);
   const [textSearch, setTextSearch] = useState<string>('');
-  const [filter, setFilter] = useState<IQueryData>({
-    page: meta.page,
-    search: '',
-  });
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const {loadingMore, refreshing, handleRefresh, loadMore} =
     usePaginationOrRefreshBooks({
-      ...filter,
+      search: textSearch,
       ...meta,
     });
 
@@ -47,18 +43,18 @@ export const BooksScreen: React.FC = () => {
           .filter(genre => genre.isChecked)
           .map(genre => genre.id)
           .join();
-      if (genresFilt.length > 0) {
-        filter.genres = genresFilt;
-      }
     }
-  }, [dispatch, filter, genres]);
+  }, [dispatch, genres]);
 
   useEffect(() => {
-    dispatch(getBookFilterThunk(filter));
-  }, [dispatch, filter]);
+    dispatch(getBookFilterThunk());
+  }, []);
 
   const handleFilter = async () => {
-    navigation.navigate('Filter', filter);
+    navigation.navigate('Filter', {
+      search: textSearch,
+      page: meta.page,
+    });
   };
 
   const handleBook = (book: IBook) => {
@@ -73,8 +69,6 @@ export const BooksScreen: React.FC = () => {
   const handleSearchPost = (
     e: NativeSyntheticEvent<TextInputKeyPressEventData>,
   ) => {
-    console.log(e);
-    setFilter({...filter, search: ''});
   };
 
   const renderFooter = () => {

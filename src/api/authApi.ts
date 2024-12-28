@@ -7,6 +7,7 @@ export const registration = async (user: ISignUp) => {
 };
 
 export const authorization = async (user: ILogin) => {
+  console.log(user)
   const res = await axiosDefault.post('/auth/sign-in', user);
   return res.data;
 };

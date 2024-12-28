@@ -4,7 +4,7 @@ import {
   TextInputKeyPressEventData,
   View,
 } from 'react-native';
-import {Input} from '../../../../components/Input/Input';
+import {Input} from 'src/components/Input/Input';
 import {styles} from './CatalogHeader.style';
 import Search from 'src/assets/svg/search.svg';
 
