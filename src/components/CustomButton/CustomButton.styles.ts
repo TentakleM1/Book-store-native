@@ -10,7 +10,7 @@ export const getStyles = (isBackground?: boolean) => {
       justifyContent: 'center',
       alignItems: 'center',
       columnGap: 20,
-      backgroundColor: isBackground ? colors.light : colors.darkBlue,
+      backgroundColor: isBackground ? 'none' : colors.darkBlue,
       borderRadius: 16,
     },
 

@@ -9,6 +9,7 @@ import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import {CustomText} from 'src/components/CustomText/CustomText';
 import FullStar from 'src/assets/svg/fullStar.svg';
 import {RefreshLayout} from 'src/components/RefreshLayout/RefreshLayout';
+import { Rating } from 'src/components/Rating/Rating';
 
 type BookScreenPropsType = {
   route?: RouteProp<{params: {id: string}}, 'params'>;
@@ -17,7 +18,6 @@ type BookScreenPropsType = {
 export const BookScreen: React.FC<BookScreenPropsType> = ({route}) => {
   const [refreshing, setRefreshing] = useState(false);
   const book = useAppSelector(state => state.book.book);
-
   useEffect(() => {
     if (route?.params.id) {
       if (book.id !== Number(route.params.id)) {
@@ -52,10 +52,11 @@ export const BookScreen: React.FC<BookScreenPropsType> = ({route}) => {
           </CustomText>
         </View>
         <View>
-          <FullStar width={40} height={40} />
+          <FullStar width={50} height={50} />
           <CustomText h3 style={globalStyles.textLight}>
             {book.totalRate ? book.totalRate : '0.0'}
           </CustomText>
+          <Rating rates={book.rates} size={40} />
         </View>
         <View>
           <CustomText h2 style={globalStyles.textBlack}>

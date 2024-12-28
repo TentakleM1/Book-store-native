@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { colors } from 'src/styles/colors.styles';
+import {colors} from 'src/styles/colors.styles';
 
 export const styles = StyleSheet.create({
   book: {
@@ -33,5 +33,11 @@ export const styles = StyleSheet.create({
     left: 10,
     display: 'flex',
     rowGap: 5,
+  },
+
+  bookRate: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

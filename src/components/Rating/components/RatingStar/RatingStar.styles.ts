@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 
-export const getStyles = (isLike?: boolean) => {
+export const getStyles = (size: number) => {
   return StyleSheet.create({
-    like: {
-      opacity: isLike ? 1 : 0.3,
+    star: {
+      width: size,
     },
   });
 };

@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 import {
   Pressable,
   PressableProps,
-  Text,
 } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -12,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import getStyles from './CustomButton.styles';
 import { SvgProps } from 'react-native-svg';
+import { CustomText } from '../CustomText/CustomText';
 
 export type CustomButtonPropsType = {
   title?: string;
@@ -44,7 +44,7 @@ export const CustomButton: React.FC<CustomButtonPropsType> = props => {
       onPress={props.onPress}>
       <Animated.View style={[getStyles(props.isBackground).button, props.styles, animatedButton]}>
         {typeof props.img === 'function' ? props.img({}) : props.img}
-        {props.title && <Text style={getStyles().buttonText}>{props.title}</Text>}
+        {props.title && <CustomText h4>{props.title}</CustomText>}
       </Animated.View>
     </Pressable>
   );

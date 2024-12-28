@@ -13,7 +13,7 @@ import {CatalogHeader} from 'src/screens/BooksScreen/components/CatalogHeader/Ca
 import {CatalogBanner} from 'src/screens/BooksScreen/components/CatalogBanner/CatalogBanner';
 import {Catalog} from 'src/screens/BooksScreen/components/Catalog/Catalog';
 import {useAppDispatch, useAppSelector} from 'src/store/store';
-import {getBookFilterThunk, IQueryData} from 'src/store/bookSlice/bookThunk';
+import {getBookFilterThunk} from 'src/store/bookSlice/bookThunk';
 import {useNavigation} from '@react-navigation/native';
 import {addBook, IBook} from 'src/store/bookSlice/bookSlice';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';

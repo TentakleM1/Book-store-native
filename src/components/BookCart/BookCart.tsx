@@ -7,6 +7,7 @@ import {CustomButton} from '../CustomButton/CustomButton';
 import {IBook} from 'src/store/bookSlice/bookSlice';
 import {LikeButton} from '../LikeButtom/LikeButton';
 import {CustomText} from '../CustomText/CustomText';
+import {Rating} from '../Rating/Rating';
 
 type BookCartPropsType = {
   book: IBook;
@@ -43,8 +44,18 @@ export const BookCart: React.FC<BookCartPropsType> = props => {
         </Pressable>
       </View>
       <View style={styles.bookContent}>
-        <CustomText h3 style={globalStyles.textBlue} >{props.book.name}</CustomText>
-        <CustomText h4 style={globalStyles.textLight} >{props.book.author.text}</CustomText>
+        <CustomText h3 style={globalStyles.textBlue}>
+          {props.book.name}
+        </CustomText>
+        <CustomText h4 style={globalStyles.textLight}>
+          {props.book.author.text}
+        </CustomText>
+      </View>
+      <View style={styles.bookRate}>
+        <Rating rates={props.book.rates} size={25} />
+        <CustomText h4 style={globalStyles.textLight}>
+          {props.book.rates.length > 0 ? props.book.rates[0].value : '0'}
+        </CustomText>
       </View>
       <CustomButton title={`$ ${props.book.cover.hardcover_price} USD`} />
     </View>

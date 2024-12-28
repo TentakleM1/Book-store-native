@@ -14,6 +14,11 @@ export interface ICover {
   hardcover_amount: number;
 }
 
+export interface IRates {
+  id: number;
+  value: number;
+}
+
 export interface IBook {
   id: number;
   name: string;
@@ -26,7 +31,7 @@ export interface IBook {
   bookGenres: string[];
   cover: ICover;
   comments: string[];
-  rates: string[];
+  rates: IRates[];
   totalRate: number;
 }
 
