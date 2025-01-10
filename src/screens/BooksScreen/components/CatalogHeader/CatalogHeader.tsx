@@ -1,23 +1,24 @@
-import React from 'react';
-import {
-  NativeSyntheticEvent,
-  TextInputKeyPressEventData,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 import {Input} from 'src/components/Input/Input';
-import {styles} from './CatalogHeader.style';
 import Search from 'src/assets/svg/search.svg';
 
 type CatalogHeaderPropsType = {
   value: string;
-  onChangeText: (text: string) => void;
-  onKeyPress: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
+  handleSearch: (text: string) => void;
 };
 
 export const CatalogHeader: React.FC<CatalogHeaderPropsType> = props => {
+  const [textSearch, onChangeTextSearch] = useState<string>(props.value);
   return (
-    <View style={styles.header}>
-      <Input img={<Search />} {...props} />
+    <View>
+      <Input
+        img={Search}
+        value={textSearch}
+        onChangeText={onChangeTextSearch}
+        onEndEditing={() => props.handleSearch(textSearch)}
+        placeholder="Search"
+      />
     </View>
   );
 };

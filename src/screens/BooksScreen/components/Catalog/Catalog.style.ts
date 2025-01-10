@@ -1,22 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {widthDimensions} from 'src/styles/global.styles';
+import { colors } from 'src/styles/colors.styles';
+import { widthDimensions } from 'src/styles/global.styles';
 
 export const styles = StyleSheet.create({
-  catalog: {
-    width: widthDimensions,
-  },
-
   catalogTitle: {
-    height: 100,
+    width: widthDimensions,
+    borderBottomColor: colors.darkBlue,
+    borderBottomWidth: 2,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-
-  catalogBooks: {
-    justifyContent: 'space-between',
-    columnGap: 20,
-    marginBottom: 40,
   },
 });

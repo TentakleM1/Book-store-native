@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {SERVER_URL} from 'src/config/api.config';
+import {SERVER_URL, SERVER_HOME} from 'src/config/api.config';
 import {TokenService} from 'src/service/TokenService/TokenService';
-import {refreshTokenApi} from './userApi';
+import userApi from './userApi';
 
 let refreshTokenProcess: {
   access_token: string;
@@ -33,7 +33,7 @@ axiosDefault.interceptors.response.use(
       if (err.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
-          refreshTokenProcess = await refreshTokenApi();
+          refreshTokenProcess = await userApi.refreshToken();
 
           if (refreshTokenProcess !== null && refreshTokenProcess) {
             TokenService.setTokens(refreshTokenProcess);

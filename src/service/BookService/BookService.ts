@@ -1,21 +1,16 @@
-import {
-  getBookApi,
-  getBookFilterApi,
-  getGenresApi,
-} from 'src/api/bookApi';
-import {IQueryData} from 'src/store/bookSlice/bookThunk';
+import bookApi from 'src/api/bookApi';
+import { IQueryData } from 'src/store/bookSlice/bookThunk';
 
 export class BookService {
   static async getBook(id: number) {
-    const data = await getBookApi(id);
-    return data.payload.book;
+    return await bookApi.getBook(id);
   }
 
-  static async getBookFilter(query: IQueryData) {
-    return await getBookFilterApi(query);
+  static async filteredBooks(query: IQueryData) {
+    return await bookApi.filteredBooks(query);
   }
 
   static async getGenres() {
-    return await getGenresApi();
+    return await bookApi.getGenres();
   }
 }

@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {BooksNavigator} from './BooksNavigator';
 import {AuthNavigator} from './AuthNavigator';
 import {useAppDispatch, useAppSelector} from 'src/store/store';
-import {getUserThunk} from 'src/store/userSlice/userThunk';
+import {getMeThunk} from 'src/store/userSlice/userThunk';
 import BootSplash from 'react-native-bootsplash';
 
 export function RootNavigation() {
@@ -12,7 +12,7 @@ export function RootNavigation() {
   useEffect(() => {
     const init = async () => {
       if (user === null) {
-        await dispatch(getUserThunk());
+        await dispatch(getMeThunk());
       }
     };
 

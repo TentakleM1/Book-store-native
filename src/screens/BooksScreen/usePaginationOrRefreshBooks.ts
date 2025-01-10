@@ -1,40 +1,48 @@
 import {useCallback, useState} from 'react';
 import {IMeta} from 'src/store/bookSlice/bookSlice';
 import {getBookFilterThunk, IQueryData} from 'src/store/bookSlice/bookThunk';
+import {IQuery} from 'src/store/filterSlice/filterSlice';
 import {useAppDispatch} from 'src/store/store';
 
-interface IUsePaginationData extends IMeta {
-  search: string;
+interface IUsePaginationData {
+  meta: IMeta;
+  query: IQuery;
 }
 
-export const usePaginationOrRefreshBooks = (meta: IUsePaginationData) => {
-  const [loadingMore, setLoadingMore] = useState<boolean>(false);
-  const [refreshing, setRefreshing] = useState<boolean>(false);
+export const usePaginationOrRefreshBooks = (props: IUsePaginationData) => {
+  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const refreshData = async (query: IQueryData) => {
     const data = await dispatch(getBookFilterThunk(query)).unwrap();
     if (data) {
-      setRefreshing(false);
-      setLoadingMore(false);
+      setIsRefreshing(false);
+      setIsLoadingMore(false);
     }
   };
 
   const handleRefresh = useCallback(() => {
-    setRefreshing(true);
-    refreshData({search: meta.search, page: 1});
+    setIsRefreshing(true);
+    refreshData({
+      page: 1,
+      search: null,
+      sortBy: null,
+      maxPrice: null,
+      genres: null,
+    });
   }, []);
 
   const loadMore = () => {
-    if (!loadingMore && meta.page < meta.pageCount) {
-      setLoadingMore(true);
-      refreshData({search: meta.search, page: meta.page + 1});
+    if (props.meta.hasNextPage) {
+      setIsLoadingMore(true);
+      refreshData({...props.query, page: props.meta.page + 1});
     }
   };
 
   return {
-    loadingMore,
-    refreshing,
+    isLoadingMore,
+    isRefreshing,
     handleRefresh,
     loadMore,
   };

@@ -9,7 +9,7 @@ interface ICartItems {
   book: IBook;
 }
 
-interface IBooking {
+export interface IBooking {
   id: number;
   total_price: number;
   cartItems: ICartItems[];
@@ -36,17 +36,13 @@ export const bookingSlice = createSlice({
       .addCase(
         getCartThunk.fulfilled,
         (state, action: PayloadAction<IBooking>) => {
-          state.booking.cartItems = action.payload.cartItems;
-          state.booking.id = action.payload.id;
-          state.booking.total_price = action.payload.total_price;
+          state.booking = action.payload;
         },
       )
       .addCase(
         addBookInCartThunk.fulfilled,
-        (state, action: PayloadAction<IBooking>) => {
-          state.booking.cartItems = action.payload.cartItems;
-          state.booking.id = action.payload.id;
-          state.booking.total_price = action.payload.total_price;
+        () => {
+          console.log('added book in cart');
         },
       );
   },

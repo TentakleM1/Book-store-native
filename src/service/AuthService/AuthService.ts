@@ -1,19 +1,25 @@
-import {authorization, registration} from 'src/api/authApi';
-import {ILogin, ISignUp} from 'src/types/types';
+import authApi from 'src/api/authApi';
+import {ISignIn, ISignUp} from 'src/types/types';
 import {TokenService} from '../TokenService/TokenService';
 
 export class AuthService {
-  static async loginIn(user: ILogin) {
-    const data = await authorization(user);
-    TokenService.setTokens({access_token: data.access_token, refresh_token: data.refresh_token});
+  static async signIn(user: ISignIn) {
+    const data = await authApi.signIn(user);
+    TokenService.setTokens({
+      access_token: data.access_token,
+      refresh_token: data.refresh_token,
+    });
     return data.user;
   }
 
   static async signUp(user: ISignUp) {
     delete user.passwordReplay;
-    const data = await registration(user);
-    await TokenService.setTokens({access_token: data.access_token, refresh_token: data.refresh_token});
-    return data.payload.user;
+    const data = await authApi.signUp(user);
+    TokenService.setTokens({
+      access_token: data.access_token,
+      refresh_token: data.refresh_token,
+    });
+    return data.user;
   }
 
   static logout() {

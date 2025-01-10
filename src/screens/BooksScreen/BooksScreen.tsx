@@ -1,13 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  NativeSyntheticEvent,
-  RefreshControl,
-  SafeAreaView,
-  TextInputKeyPressEventData,
-  View,
-} from 'react-native';
+import React, {useEffect} from 'react';
+import {ActivityIndicator, FlatList, SafeAreaView} from 'react-native';
 import styles from './Books.style';
 import {CatalogHeader} from 'src/screens/BooksScreen/components/CatalogHeader/CatalogHeader';
 import {CatalogBanner} from 'src/screens/BooksScreen/components/CatalogBanner/CatalogBanner';
@@ -18,92 +10,65 @@ import {useNavigation} from '@react-navigation/native';
 import {addBook, IBook} from 'src/store/bookSlice/bookSlice';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {usePaginationOrRefreshBooks} from './usePaginationOrRefreshBooks';
-import {getGenresThunk} from 'src/store/filterSlice/filterThunk';
+import {changeQuery} from 'src/store/filterSlice/filterSlice';
+import {BookCart} from 'src/components/BookCart/BookCart';
 
 export const BooksScreen: React.FC = () => {
   const {books, meta} = useAppSelector(state => state.book);
-  const genres = useAppSelector(state => state.filter.filters);
-  const [textSearch, setTextSearch] = useState<string>('');
+  const query = useAppSelector(state => state.filter.query);
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const {loadingMore, refreshing, handleRefresh, loadMore} =
-    usePaginationOrRefreshBooks({
-      search: textSearch,
-      ...meta,
-    });
+  const {isRefreshing, handleRefresh, loadMore} = usePaginationOrRefreshBooks({
+    meta,
+    query,
+  });
 
   useEffect(() => {
-    if (genres === null) {
-      dispatch(getGenresThunk());
-    }
-    if (genres) {
-      const genresFilt =
-        genres &&
-        genres
-          .filter(genre => genre.isChecked)
-          .map(genre => genre.id)
-          .join();
-    }
-  }, [dispatch, genres]);
-
-  useEffect(() => {
-    dispatch(getBookFilterThunk());
-  }, []);
+    dispatch(
+      getBookFilterThunk({
+        ...query,
+        page: meta.page,
+      }),
+    );
+  }, [dispatch, meta.page, query]);
 
   const handleFilter = async () => {
     navigation.navigate('Filter', {
-      search: textSearch,
+      ...query,
       page: meta.page,
     });
   };
-
   const handleBook = (book: IBook) => {
     dispatch(addBook(book));
     navigation.navigate('Book', {id: book.id});
   };
 
-  const handleSearch = (text: string) => {
-    setTextSearch(text);
+  const handleSearch = async (text: string) => {
+    dispatch(changeQuery({...query, search: text}));
+    await dispatch(getBookFilterThunk({...query, page: 1, search: text}));
   };
-
-  const handleSearchPost = (
-    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
-  ) => {
-  };
-
-  const renderFooter = () => {
-    if (!loadingMore || books.length < meta.itemCount) {
-      return null;
-    }
-    return <ActivityIndicator animating size="large" />;
-  };
-
   return (
     <SafeAreaView style={styles.books}>
+      <CatalogHeader
+        value={query.search ? query.search : ''}
+        handleSearch={handleSearch}
+      />
+      <Catalog handleFilter={handleFilter} />
       <FlatList
-        data={[books]}
+        data={books}
+        ListHeaderComponentStyle={styles.booksContainer}
+        ListHeaderComponent={<CatalogBanner />}
+        numColumns={2}
+        columnWrapperStyle={styles.catalogBooks}
         renderItem={({item}) => (
-          <View style={styles.booksContainer}>
-            <CatalogHeader
-              value={textSearch}
-              onChangeText={handleSearch}
-              onKeyPress={handleSearchPost}
-            />
-            <CatalogBanner />
-            <Catalog
-              books={item}
-              handleBook={handleBook}
-              handleFilter={handleFilter}
-            />
-          </View>
+          <BookCart book={item} onPress={() => handleBook(item)} />
         )}
-        keyExtractor={() => `${Date.now()}`}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
-        ListFooterComponent={renderFooter}
+        ListEmptyComponent={<ActivityIndicator animating size="large" />}
+        keyExtractor={item => `${Date.now()}${item.id}`}
+        refreshing={isRefreshing}
+        onRefresh={handleRefresh}
         onEndReached={loadMore}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.3}
       />
     </SafeAreaView>
   );

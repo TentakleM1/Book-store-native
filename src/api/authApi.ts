@@ -1,13 +1,15 @@
-import { ILogin, ISignUp } from 'src/types/types';
+import {ISignIn, ISignUp} from 'src/types/types';
 import {axiosDefault} from './axiosDefault';
+import { IUserResponseData } from './types';
 
-export const registration = async (user: ISignUp) => {
-  const res = await axiosDefault.post('/auth/sign-up', user);
+const signUp = async (user: ISignUp) => {
+  const res = await axiosDefault.post<IUserResponseData>('/auth/sign-up', user);
   return res.data;
 };
 
-export const authorization = async (user: ILogin) => {
-  console.log(user)
-  const res = await axiosDefault.post('/auth/sign-in', user);
+const signIn = async (user: ISignIn) => {
+  const res = await axiosDefault.post<IUserResponseData>('/auth/sign-in', user);
   return res.data;
 };
+
+export default {signIn, signUp};

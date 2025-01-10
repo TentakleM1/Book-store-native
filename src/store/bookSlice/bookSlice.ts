@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {getBookFilterThunk} from './bookThunk';
+import { IBookResponseData } from 'src/api/types';
 
 export interface IAuthor {
   id: number;
@@ -44,7 +45,7 @@ export interface IMeta {
   hasNextPage: boolean;
 }
 
-type BooksType = IBook[];
+export type BooksType = IBook[];
 
 interface IInitialStateBook {
   book: IBook;
@@ -99,7 +100,7 @@ export const bookSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(
       getBookFilterThunk.fulfilled,
-      (state, action: PayloadAction<{meta: IMeta; data: BooksType}>) => {
+      (state, action: PayloadAction<IBookResponseData>) => {
         state.meta = action.payload.meta;
         state.books =
           action.payload.meta.page === 1

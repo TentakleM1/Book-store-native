@@ -1,11 +1,13 @@
+import { IBooking } from 'src/store/bookingSlice/bookingSlice';
 import {axiosDefault} from './axiosDefault';
 
-export const getCartApi = async () => {
-  const res = await axiosDefault.get('/user/cart');
+const getCart = async () => {
+  const res = await axiosDefault.get<IBooking>('/user/cart');
   return res.data;
 };
 
-export const addBookInCartApi = async (bookId: number) => {
-  const res = await axiosDefault.post(`/user/cart/${bookId}`);
-  return res.data;
+const addBookInCart = async (bookId: number) => {
+  await axiosDefault.post(`/user/cart/${bookId}`);
 };
+
+export default {getCart, addBookInCart};

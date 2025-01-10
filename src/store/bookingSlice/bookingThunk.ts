@@ -1,21 +1,25 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {BookingService} from 'src/service/BookingService/BookingService';
+import {IBooking} from './bookingSlice';
 
-export const getCartThunk = createAsyncThunk('booking/getCart', async () => {
-  try {
-    return await BookingService.getCart();
-  } catch (error) {
-    console.log(error);
-  }
-});
+export const getCartThunk = createAsyncThunk<IBooking>(
+  'booking/getCart',
+  async (_, thunkAPI) => {
+    try {
+      return await BookingService.getCart();
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  },
+);
 
 export const addBookInCartThunk = createAsyncThunk(
   'booking/addBookInCart',
-  async (bookId: number) => {
+  async (bookId: number, thunkAPI) => {
     try {
-      return await BookingService.addBookInCart(bookId);
-    } catch (error) {
-      console.log(error);
+      await BookingService.addBookInCart(bookId);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );

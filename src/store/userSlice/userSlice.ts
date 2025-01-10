@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
-  getUserThunk,
-  loginInThunk,
+  getMeThunk,
+  signInThunk,
   signUpThunk,
   uploadAvatarThunk,
   updatePasswordThunk,
@@ -51,18 +51,12 @@ export const userSlice = createSlice({
       .addCase(signUpThunk.fulfilled, (state, action: PayloadAction<IUser>) => {
         state.user = action.payload;
       })
-      .addCase(
-        loginInThunk.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          state.user = action.payload;
-        },
-      )
-      .addCase(
-        getUserThunk.fulfilled,
-        (state, action: PayloadAction<IUser>) => {
-          state.user = action.payload;
-        },
-      )
+      .addCase(signInThunk.fulfilled, (state, action: PayloadAction<IUser>) => {
+        state.user = action.payload;
+      })
+      .addCase(getMeThunk.fulfilled, (state, action: PayloadAction<IUser>) => {
+        state.user = action.payload;
+      })
       .addCase(
         updateProfileThunk.fulfilled,
         (state, action: PayloadAction<IUser>) => {

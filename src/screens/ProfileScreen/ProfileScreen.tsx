@@ -15,7 +15,7 @@ import {
 } from 'src/utils/validation/userSchema';
 import {IUpdatePassword, IUpdateProfile} from './types';
 import {
-  getUserThunk,
+  getMeThunk,
   updatePasswordThunk,
   updateProfileThunk,
 } from 'src/store/userSlice/userThunk';
@@ -99,7 +99,7 @@ export const ProfileScreen: React.FC = () => {
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    const refreshUser = await dispatch(getUserThunk()).unwrap();
+    const refreshUser = await dispatch(getMeThunk()).unwrap();
     if (refreshUser) {
       setRefreshing(false);
     }

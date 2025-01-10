@@ -1,29 +1,23 @@
-import {
-  getUserApi,
-  uploadAvatarApi,
-  updatePasswordApi,
-  updateProfileApi,
-} from 'src/api/userApi';
+import userApi from 'src/api/userApi';
 import {IUpdatePassword, IUpdateProfile} from 'src/screens/ProfileScreen/types';
 
 export class UserService {
-  static async getUser() {
-    const data = await getUserApi();
+  static async getMe() {
+    const data = await userApi.getMe();
     return data.user;
   }
 
   static async updateProfile(user: IUpdateProfile) {
-    const data = await updateProfileApi(user);
+    const data = await userApi.updateProfile(user);
     return data;
   }
 
-  static async uploadAvatar(base64Data: string) {
-    return await uploadAvatarApi(base64Data);
+  static async files(base64Data: string) {
+    return await userApi.files(base64Data);
   }
 
   static async updatePassword(passwords: IUpdatePassword) {
     delete passwords.passwordReplay;
-    await updatePasswordApi(passwords);
+    await userApi.updatePassword(passwords);
   }
-
 }

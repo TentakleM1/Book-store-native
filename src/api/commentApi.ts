@@ -1,13 +1,15 @@
 import {axiosDefault} from './axiosDefault';
 
-export async function addCommentApi(bookId: number, text: string) {
-  const response = await axiosDefault.post(`/book/${bookId}`, {
+const addComment = async (bookId: number, text: string) => {
+  const res = await axiosDefault.post(`/book/${bookId}`, {
     text,
   });
-  return response.data;
-}
+  return res.data;
+};
 
-export async function getAllCommentsApi(bookId: number) {
-  const response = await axiosDefault.get(`/book/${bookId}`);
-  return response.data;
-}
+const getAllComments = async (bookId: number) => {
+  const res = await axiosDefault.get(`/book/${bookId}`);
+  return res.data;
+};
+
+export default {addComment, getAllComments};

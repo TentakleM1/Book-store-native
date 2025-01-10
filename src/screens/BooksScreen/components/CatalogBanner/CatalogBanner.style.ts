@@ -1,11 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {colors} from 'src/styles/colors.styles';
-import {widthDimensions} from 'src/styles/global.styles';
 
 export const styles = StyleSheet.create({
   banner: {
     height: 500,
-    width: widthDimensions,
     position: 'relative',
     paddingTop: 20,
     display: 'flex',

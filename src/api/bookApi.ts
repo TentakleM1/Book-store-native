@@ -1,17 +1,24 @@
 import {IQueryData} from 'src/store/bookSlice/bookThunk';
 import {axiosDefault} from './axiosDefault';
+import {IBook} from 'src/store/bookSlice/bookSlice';
+import {IGenre} from 'src/store/filterSlice/filterSlice';
+import { IBookResponseData } from './types';
 
-export const getBookApi = async (id: number) => {
-  const res = await axiosDefault.get(`/books/${id}`);
+const getBook = async (id: number) => {
+  const res = await axiosDefault.get<IBook>(`/books/${id}`);
   return res.data;
 };
 
-export const getBookFilterApi = async (query: IQueryData) => {
-  const res = await axiosDefault.get('/books', {params: query});
+const filteredBooks = async (
+  query: IQueryData,
+) => {
+  const res = await axiosDefault.get<IBookResponseData>('/books', {params: query});
   return res.data;
 };
 
-export async function getGenresApi() {
-  const res = await axiosDefault.get('/genres');
+const getGenres = async () => {
+  const res = await axiosDefault.get<IGenre[]>('/genres');
   return res.data;
-}
+};
+
+export default {getBook, filteredBooks, getGenres};

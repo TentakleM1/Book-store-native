@@ -2,67 +2,71 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {IUpdatePassword, IUpdateProfile} from 'src/screens/ProfileScreen/types';
 import {AuthService} from 'src/service/AuthService/AuthService';
 import {UserService} from 'src/service/UserService/UserService';
-import {ILogin, ISignUp} from 'src/types/types';
+import {ISignIn, ISignUp} from 'src/types/types';
+import {IUser} from './userSlice';
 
-export const signUpThunk = createAsyncThunk(
+export const signUpThunk = createAsyncThunk<IUser, ISignUp>(
   'user/signUp',
-  async (user: ISignUp) => {
+  async (user, thunkAPI) => {
     try {
       return await AuthService.signUp(user);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );
 
-export const loginInThunk = createAsyncThunk(
-  'user/loginIn',
-  async (user: ILogin) => {
+export const signInThunk = createAsyncThunk<IUser, ISignIn>(
+  'user/signIn',
+  async (user, thunkAPI) => {
     try {
-      return await AuthService.loginIn(user);
-    } catch (error) {
-      console.log(error);
+      return await AuthService.signIn(user);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );
 
-export const getUserThunk = createAsyncThunk('user/getUser', async () => {
-  try {
-    return await UserService.getUser();
-  } catch (error) {
-    console.log(error);
-  }
-});
+export const getMeThunk = createAsyncThunk(
+  'user/getMe',
+  async (_, thunkAPI) => {
+    try {
+      return await UserService.getMe();
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  },
+);
 
-export const updateProfileThunk = createAsyncThunk(
+export const updateProfileThunk = createAsyncThunk<IUser, IUpdateProfile>(
   'user/updateProfile',
-  async (user: IUpdateProfile) => {
+  async (user, thunkAPI) => {
     try {
       return await UserService.updateProfile(user);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );
 
-export const uploadAvatarThunk = createAsyncThunk(
+export const uploadAvatarThunk = createAsyncThunk<{filename: string}, string>(
   'user/uploadAvatar',
-  async (base64Data: string) => {
+  async (base64Data, thunkAPI) => {
     try {
-      return await UserService.uploadAvatar(base64Data);
-    } catch (error) {
-      console.log(error);
+      return await UserService.files(base64Data);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );
 
 export const updatePasswordThunk = createAsyncThunk(
   'user/updatePassword',
-  async (password: IUpdatePassword) => {
+  async (password: IUpdatePassword, thunkAPI) => {
     try {
       await UserService.updatePassword(password);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   },
 );

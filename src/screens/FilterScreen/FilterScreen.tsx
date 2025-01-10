@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, SafeAreaView, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from 'src/store/store';
 import globalStyles from 'src/styles/global.styles';
 import {styles} from './Filter.style';
@@ -8,34 +8,24 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {CustomButton} from 'src/components/CustomButton/CustomButton';
 import {FilterGenre} from './components/FilterGenre/FilterGenre';
 import {changeFilter} from 'src/store/filterSlice/filterSlice';
+import {CustomText} from 'src/components/CustomText/CustomText';
+import {getGenresThunk} from 'src/store/filterSlice/filterThunk';
 
 export const FilterScreen: React.FC = () => {
-  const genres = useAppSelector(state => state.filter.filters);
+  const {genres, query} = useAppSelector(state => state.filter);
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [checkBoxes, setCheckBoxes] = useState(genres ? genres : []);
-
-  const handleCheckboxPress = (checked: boolean, id: number) => {
-    if (id === 0) {
-      setCheckBoxes(
-        checkBoxes.map(item => ({
-          ...item,
-          isChecked: checked,
-        })),
-      );
-      return;
+  console.log(genres)
+  useEffect(() => {
+    if (genres === null) {
+      dispatch(getGenresThunk());
     }
+  }, [dispatch, genres]);
+  const handleCheckboxPress = (checked: boolean, id: number) => {};
 
-    setCheckBoxes(
-      checkBoxes.map(item =>
-        item.id === id ? {...item, isChecked: checked} : item,
-      ),
-    );
-  };
-
-  const handleAplly = async () => {
-    await dispatch(changeFilter(checkBoxes));
-    navigation.navigate('Home');
+  const handleAplly = () => {
+    navigation.push('Home');
   };
 
   return (
@@ -46,7 +36,9 @@ export const FilterScreen: React.FC = () => {
           return (
             <View style={styles.filterContainer}>
               <View>
-                <Text style={globalStyles.textBigBlack}>Genres</Text>
+                <CustomText h2 style={globalStyles.textBigBold}>
+                  Genres
+                </CustomText>
                 <FlatList
                   data={genres}
                   renderItem={({item}) => (
@@ -56,10 +48,14 @@ export const FilterScreen: React.FC = () => {
                 />
               </View>
               <View>
-                <Text style={globalStyles.textBigBlack}>Price</Text>
+                <CustomText h2 style={globalStyles.textBigBold}>
+                  Price
+                </CustomText>
               </View>
               <View>
-                <Text style={globalStyles.textBigBlack}>Sort by</Text>
+                <CustomText h2 style={globalStyles.textBigBold}>
+                  Sort by
+                </CustomText>
               </View>
             </View>
           );
